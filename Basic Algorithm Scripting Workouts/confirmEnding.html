@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm String Ends With Target String</title>
+</head>
+<body>
+    <script>
+        function confirmEnding(string, target) {
+            // return string.indexOf(target);
+            // return string.includes(target);
+            // return string[string.length - 1] === target;
+            // return string[string.length - 1] === target && string.indexOf(target) === string.length - 1;
+            return string.substring(string.length - target.length) === target;
+        }
+        console.log(confirmEnding("Bastian", "n"));
+        console.log(confirmEnding("namenamee ge", "ge"));
+    </script>
+</body>
+</html>

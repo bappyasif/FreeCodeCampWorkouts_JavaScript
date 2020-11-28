@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falsy Bouncer</title>
+</head>
+<body>
+    <script>
+        function falsyBouncer(array) {
+            return array.filter(Boolean);
+
+            // let newArray = [];
+            // array.forEach(item=> {
+            //     if(item) {
+            //         newArray.push(item);
+            //     }
+            // });
+            // return newArray;
+        }
+        console.log(falsyBouncer([7,"ate","",false,9]));
+    </script>
+</body>
+</html>

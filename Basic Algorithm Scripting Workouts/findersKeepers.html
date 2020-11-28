@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finders Keepers</title>
+</head>
+<body>
+    <script>
+        function findElement(array, func) {
+            // let num = 0;
+            // // num = array.map(arr => func(arr));
+            // for(let i in array) {
+            //     if(func(array[i])) return array[i];
+            // }
+            // // return num;
+            // return undefined;
+
+            return array.find(func);
+        }
+
+        function evenNumber(num) {return num % 2 === 0}
+        console.log(findElement([1,3,5,8,9,10], num=>num%2===0));
+        console.log(findElement([1,2,3,4], evenNumber));
+        console.log(findElement([1,3,5,9], evenNumber));
+        console.log(findElement([1,3,5,8,9,10], evenNumber));
+    </script>
+</body>
+</html>

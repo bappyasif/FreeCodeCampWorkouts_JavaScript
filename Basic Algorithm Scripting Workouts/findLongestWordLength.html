@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Longest Word In a String</title>
+</head>
+<body>
+    <script>
+        function findLongestWordLength(string) {
+            // return string.split(" ").reduce((word, next) => word.length > next.length,0);
+            let words = string.split(" ");
+            return words.map(word => word.length).reduce((a,b)=>Math.max(a,b));
+        }
+        console.log(findLongestWordLength("The quick brown fox jumped over the lazy dog."));
+    </script>
+</body>
+</html>

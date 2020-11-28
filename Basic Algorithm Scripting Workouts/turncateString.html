@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turncate a String</title>
+</head>
+<body>
+    <script>
+        function turncateString(string, maxLength) {
+            let returnString = "";
+            if(string.length > maxLength) {
+                for(let i = 0; i <= maxLength; i++) {
+                    if(i === maxLength) {
+                        // returnString += string[i]+"...";
+                        returnString += "...";
+                        // console.log("here...");
+                    } else {
+                        // console.log("here");
+                        returnString += string[i];
+                    }
+                }
+            } else {
+                returnString = string;
+            }
+
+            return returnString;
+        }
+        console.log(turncateString("A-",1));
+    </script>
+</body>
+</html>

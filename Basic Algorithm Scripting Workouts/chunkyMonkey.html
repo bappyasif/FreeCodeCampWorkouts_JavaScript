@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split an Array into Groups of array with length Specified</title>
+</head>
+<body>
+    <script>
+        function chunkyMonkey(array, chunk) {
+            if(array.length <= chunk) {
+                return [array];
+            } else {
+                return [array.slice(0,chunk)].concat(chunkyMonkey(array.slice(chunk),chunk));
+            }
+       
+            // let newArray = [];
+            
+            // while(array.length !== -1) {
+            //     newArray.push(array.splice(0,chunk));
+            // }
+
+            // for(let i = 0; i< array.length; i +=chunk) {
+            //     newArray.push(array.slice(i,i+chunk))
+            // }
+
+            // newArray.push(array.slice(0,chunk));
+            // for(let i in array) {
+            //     newArray.push(array.splice(i,chunk))
+            // }
+       
+            // return newArray;
+        }
+        console.log(chunkyMonkey(["a","b","c","d"],2));
+    </script>
+</body>
+</html>

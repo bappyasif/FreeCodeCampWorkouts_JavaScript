@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Case A Sentence</title>
+</head>
+<body>
+    <script>
+        function titleCase(string) {
+
+            return string.toLowerCase().replace(/(^|\s)\S/g, char =>char.toUpperCase());
+
+            // let newString = string.toLowerCase().split(" ");
+
+            // let result = newString.map(val => val.replace(val.charAt(0), val.charAt(0).toUpperCase()));
+            // return result.join(" ");
+
+            // let updatedString = [];
+            
+            // newString.forEach(val => updatedString.push(val.charAt(0).toUpperCase()+val.substring(1)))
+            // return updatedString.join(" ");
+
+            // for(let i in newString) {
+            //     newString.map(val => updatedString.push(val.charAt(0).toUpperCase()+val.substring(1)));
+            // }
+
+            // let newString = "";
+            // // string.split(" ").forEach(arr => newString += arr[0].toUpperCase()+arr.substring(1)+" ");
+            // string.split(" ").forEach(arr => string += arr[0].toUpperCase()+arr.substring(1)+ " ");
+            // // return newString.join(" ");
+            // return string;
+        }
+        console.log(titleCase("There is a teapot, which is worshipped by many"));
+    </script>    
+</body>
+</html>

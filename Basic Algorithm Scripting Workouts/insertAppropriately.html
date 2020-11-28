@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where do I insert</title>
+</head>
+<body>
+    <script>
+        function getIndexToInsert(array, num) {
+            return array.filter(val=>val>=num).length;
+            
+            // return array.concat(num).sort((a,b)=>a-b).indexOf(num);
+
+
+            // let idx = array.sort((a,b) => a - b).findIndex(curr=>curr >= num);
+            // return idx === -1 ? array.length : idx;
+
+
+            // array.push(num);
+            // array.sort((a,b) => a - b);
+            // return array.indexOf(num);
+            
+
+
+            // let newArray =  array.sort();
+            // let idx = [];
+            // // let idx = newArray.forEach((val,i)=> val < num?i:-1);
+            // // let idx = newArray.indexof(num);
+            // let i = "";
+            // newArray.forEach((val,id)=>{
+            //     if(val < num) {
+            //         // idx.push(val);
+            //         i = id;
+            //     }
+            // });
+
+            // // idx.push(newArray.slice(0, i),num, newArray.splice(idx))
+            // idx.push(newArray.splice(0,i+1));
+            // // return idx.concat(num, newArray.splice(i+2,0));
+        }
+        console.log(getIndexToInsert([10,20,30,40,50,60], 35));
+    </script>
+</body>
+</html>

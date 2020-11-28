@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Mutations</title>
+</head>
+
+<body>
+    <script>
+        function stringMutation(array) {
+            return array[1].toLowerCase().split().every(letter => array[0].toLowerCase().indexOf(letter) !== -1);
+
+
+            // let first = array[0].toLowerCase().split();
+            // // return first.split();
+            // let next = array[1].toLowerCase().split();
+            // for(let i in first) {
+            //     return next.indexOf(first[i]) < 0 ? false : true;
+            // }
+
+
+            // array.map(arr=>arr.toLowerCase());
+            // return array.map((arr,idx)=>arr[idx].indexOf(arr[idx+1]));
+
+
+            // for(let i = 0; i < array.length; i++) {
+            //     // return array[i]
+            //     return array[i].split().filter(item=>item.indexOf(array[i+1]))
+            // }
+
+            // for(let idx in array) {
+            //     return array[idx].map(item=>item.indexOf(array[idx+1]))
+            // }
+        }
+        console.log(stringMutation(["Hello", "hello"]));
+    </script>
+</body>
+
+</html>

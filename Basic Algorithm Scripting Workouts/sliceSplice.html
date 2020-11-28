@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice and Splice</title>
+</head>
+<body>
+    <script>
+        function frankenSplice(arr1, arr2, idx) {
+            let newArray = arr2.slice();
+            newArray.splice(idx, 0, ...arr1)
+            return newArray;
+
+            // let newArr = arr2.slice(0, idx);
+            // return newArr.concat(arr1, arr2.splice(idx));
+            
+            // let newArr = arr2.slice(0,idx);
+            // let newArr = arr2.slice(0, idx);
+            // arr1.forEach(num => newArr.push(num));
+            // arr1.forEach(num => newArr.splice(idx, 0, arr1[num]));
+            // newArr.push(arr2.splice(idx));
+            // newArr.concat("arr1");
+            // return newArr.concat(arr1, arr2.splice(idx));
+
+            // let newArray = [];
+            // newArray.push(arr2.slice(0, idx));
+            // // newArray.concat(arr1);
+            // newArray.push(arr1);
+            // newArray.push(arr2.slice(idx));
+            // // newArray.push(arr2.slice(0, idx),newArray.concat(arr1), arr2.slice(1));
+            // // newArray.concat(arr1,arr2.splice(1));
+            // // newArray.push(newArray.concat(arr1));
+            // // newArray.push(arr2.slice(1));
+            // return newArray;
+        }
+        console.log(frankenSplice([1,2,3],[4,5],1));
+    </script>
+</body>
+</html>
