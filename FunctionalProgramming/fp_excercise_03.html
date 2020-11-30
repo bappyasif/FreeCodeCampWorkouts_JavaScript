@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example of Declarative Programing</title>
+</head>
+<body>
+    <script>
+        // tabs is an array of titles of each site open within window
+        function Window(tabs) {
+            this.tabs = tabs; // record of array inside this object
+        }
+        // when ou join two windows into one window
+        Window.prototype.join = function(otherWindow) {
+            this.tabs = this.tabs.concat(otherWindow.tabs);
+            return this;
+        }
+        // when you open a new tab at the end
+        Window.prototype.tabOpen = function() {
+            // this.tabs.push(tab, "new tab");
+            this.tabs.push("new tab");
+            return this;
+        }
+        // when you a close a tab
+        Window.prototype.tabClose = function(index) {
+            // let tabsBeforeIndex = this.tabs.splice(0, index); // get tabs before the current tab
+            let tabsBeforeIndex = this.tabs.slice(0, index); // splice changes original array that's why using slice
+            console.log(tabsBeforeIndex);
+            // let tabsAfterIndex = this.tabs.splice(index); // get tab after the current tab
+            let tabsAfterIndex = this.tabs.slice(index+1); // splice changes original array that's why using slice
+            console.log(tabsAfterIndex);
+            this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // joining those tabs together
+            return this;
+        }
+        // let's create three browser windows, with list of tabs in them
+        let workWindow = new Window(["Gmail","Inbox","Work mail","Docs", "FreeCodeCamp"]);
+        let socialWindow = new Window(["FB","Gitter","Reddit","Twitter","Medium"]);
+        let videoWindow = new Window(["Netflix","Youtube","Vimeo","Vine"]);
+        // Now perform tab opening, closing and other operations
+        let finalTabs = socialWindow.tabOpen().join(videoWindow.tabClose(2)).join(workWindow.tabClose(1).tabOpen());
+        console.log(finalTabs);
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Concat Instead Push</title>
+</head>
+<body>
+    <script>
+        function nonMutatingPush(original, newItem) {
+            // return original.push(newItem) // mutates original not functional programing convention
+            return original.concat(newItem);
+        }
+        let first = [1,2,3];
+        let second = [4,5];
+        console.log(first, second, nonMutatingPush(first, second));
+    </script>
+</body>
+</html>

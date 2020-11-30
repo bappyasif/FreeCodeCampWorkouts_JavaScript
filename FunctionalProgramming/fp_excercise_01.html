@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functional Programming Excercise 01</title>
+</head>
+<body>
+    <script>
+        let prepareTea = () => "Green Herbal Spiced Tea";
+        let getTea = numOfCups => {
+            let teaCups = [];
+            for (let i = 1; i <= numOfCups; i++) {
+                let teaCup = prepareTea();
+                teaCups.push(teaCup);
+            }
+            return teaCups;
+        }
+        let tea4TeamFCC = getTea(40);
+        console.log(tea4TeamFCC, getTea(40));
+    </script>
+</body>
+</html>

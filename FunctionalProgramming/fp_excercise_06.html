@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implement a Map Method</title>
+</head>
+
+<body>
+    <script>
+        // The global variable
+        var s = [23, 65, 98, 5];
+
+        Array.prototype.myMap = function (callback) {
+            var newArray = [];
+            // Only change code below this line
+            this.forEach(value => newArray.push(callback(value)));
+            // this.forEach((value,idx,callback) => newArray.push(value));
+            // for(let i = 0; i < s.length; i++) newArray.push(s[i])
+            // Only change code above this line
+            // console.log("this", this)
+            return newArray;
+        };
+
+        var new_s = s.myMap(function (item) {
+            return item * 2;
+        });
+
+        console.log(s, new_s);
+
+    </script>
+</body>
+
+</html>

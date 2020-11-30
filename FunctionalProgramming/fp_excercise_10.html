@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Array Splice Method</title>
+</head>
+<body>
+    <script>
+        function nonMutatingSplice(cities) {
+            // return cities.splice(3);
+            return cities.slice(0,3) // return firs 3 items
+        }
+        let inputCities = ["Chicago", "Delhi", "Dhaka", "Beluchistan", "London", "Berlin"];
+        console.log(nonMutatingSplice(inputCities));
+    </script>
+</body>
+</html>

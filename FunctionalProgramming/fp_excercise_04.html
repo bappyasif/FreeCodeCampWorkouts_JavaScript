@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refactor Functions</title>
+</head>
+<body>
+    <script>
+        let bookList = ["The hound of the Baskervilles", "On The Electrodynamics of Moving Bodies",
+                        "Philosophie of Naturalis Principia Mathematica","Disquitiones Arithmaticae"];
+        // Add book
+        function add(bookList, bookName) {
+            return [...bookList, bookName]; // copy that array BookList, so that it gets all values in it and return with new book name
+            // bookList = [...bookList];
+            // bookList.push(bookName);
+            // return bookList;
+        }
+        // remove book
+        function remove(bookList, bookName) {
+            return bookList.filter(book=> book !== bookName); // retuurn an array without given bookNames
+            // bookList = [...bookList]; // copy that array BookList, so that it gets all values in it
+            // let book_index = bookList.indexOf(bookName);
+            // if(book_index >= 0) {
+            //     // bookList = bookList.splice(book_index, 1);
+            //     bookList.splice(book_index, 1);
+            //     return bookList;
+            // }
+        }
+        let newBookList = add(bookList, "A Brief History of Time");
+        console.log(newBookList);
+        let newerBookList = remove(bookList,"On The Electrodynamics of Moving Bodies");
+        console.log(newerBookList);
+        let newestBookList = remove(add(bookList, "A Brief History of Time"), "On The Electrodynamics of Moving Bodies");
+        console.log(newestBookList);
+        console.log(bookList);
+    </script>
+</body>
+</html>
+<!--
+// Add book
+        function add(array, bookName) {
+            let newList = [...array];
+            // let newList = array;
+            newList.push(bookName);
+            // bookList.push(bookName);
+            // return bookList;
+            return newList;
+        }
+        // remove book
+        function remove(array, bookName) {
+            let newList = [...array];
+            // let newList = array;
+            // let book_index = bookList.indexOf(bookName);
+            let book_index = newList.indexOf(bookName);
+            if(book_index !== -1) {
+                newList.splice(book_index, 1);
+                // bookList.splice(book_index, 1);
+                return newList;
+                // return bookList;
+            }
+        }
+        let newBookList = add(bookList, "A Brief History of Time");
+        console.log(newBookList);
+        let newerBookList = remove(bookList,"On The Electrodynamics of Moving Bodies");
+        console.log(newerBookList);
+        let newestBookList = remove(add(bookList, "A Brief History of Time"), "On The Electrodynamics of Moving Bodies");
+        // let newestBookList = add(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies").remove(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies");
+        // add(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies")
+        // let newestBookList = remove(bookList,"A Brief History of Time", "On The Electrodynamics of Moving Bodies")
+        console.log(newestBookList);
+        console.log(bookList);
+
+    // Add book
+        function add(bookList, bookName) {
+            // let newList = bookList;
+            let newList = [...bookList];
+            newList.push(bookName);
+            // bookList.push(bookName);
+            // return bookList;
+            return newList;
+        }
+        // remove book
+        function remove(bookList, bookName) {
+            // let bookList = [];
+            // bookList = [];
+            // let newList = bookList;
+            let newList = [...bookList];
+            // let book_index = bookList.indexOf(bookName);
+            let book_index = newList.indexOf(bookName);
+            if(book_index !== -1) {
+                newList.splice(book_index, 1);
+                // bookList.splice(book_index, 1);
+                return newList;
+                // return bookList;
+            }
+        }
+        let newBookList = add(bookList, "A Brief History of Time");
+        console.log(newBookList);
+        let newerBookList = remove(bookList,"On The Electrodynamics of Moving Bodies");
+        console.log(newerBookList);
+        // let newestBookList = remove(add(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies"));
+        // let newestBookList = add(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies").remove(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies");
+        add(bookList, "A Brief History of Time", "On The Electrodynamics of Moving Bodies")
+        let newestBookList = remove(bookList,"A Brief History of Time", "On The Electrodynamics of Moving Bodies")
+        console.log(newestBookList);
+        // console.log(bookList);
+-->
