@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currying and Partial Application</title>
+</head>
+
+<body>
+    <script>
+        function add(x) {
+            // return x => y => x+y;
+            return function(y) {
+                return function(z) {
+                    return (x+y+z);
+                }
+            }
+        }
+        console.log(add(10)(20)(30));
+        // console.log(add(10)(20));
+
+        // Un-curried function
+        let sum = (x, y) => x + y;
+        // Curried function
+        let value = x => y => x + y;
+        console.log(sum(2, 4), value(4)(4));
+
+        //Impartial function
+        function impartial(x, y, z) { return x + y + z; }
+        // let partialFn = impartial.bind(this,4);
+        let partialFn = impartial.bind(this, 4, 4);
+        console.log(partialFn(11));
+
+    </script>
+</body>
+
+</html>
+
+<!--
+
+            function add(x) {
+            // return x => y => x+y;
+            return function curried(...args) {
+                if(args.length >= x.length) {
+                    return x.apply(this, args);
+                } else {
+                    return function(...args2) {
+                        return curried.apply(this, args.concat(args2))
+                    }
+                }
+            }
+        }
+            function add(x) {
+            // return x => y => x+y;
+            return function(y) {
+                return y !== undefined ? add(x+y) : x;
+            }
+        }
+        console.log(add(10)(20)(30)());
+        console.log(add(10)(20)(30)());
+
+            function add(x) {
+            // return x => y => x+y;
+            // let sum = y => sum(x + y);
+            // sum.valueOf = () => x;
+            // return sum;
+            let sumCurry = y => {
+                x += y;
+                return sumCurry;
+            }
+            // sumCurry.toString = () => x;
+            return sumCurry;
+        }
+
+        function add(x) {
+            // return x => y => x+y;
+            let sum = x;
+            return function resultFn(y) {
+                if (arguments.length) {
+                    sum += y;
+                    resultFn.result = sum;
+                    return resultFn;
+                    // return sum;
+                }
+                // return sum;
+            }
+        }
+
+    function add(x) {
+            // return x => y => x+y;
+            let sum = x;
+            return function resultFn(y) {
+                sum += y;
+                resultFn = sum;
+                return resultFn;
+                // return sum;
+            }
+            // resultFn.valueOf = () => sum;
+            resultFn.valueOf = function() {return sum;}
+            return resultFn;
+        }
+-->

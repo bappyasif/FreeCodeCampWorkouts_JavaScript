@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOF Map Filter Reduce</title>
+</head>
+<body>
+    <script>
+        let squareList = array => {
+            // return array.filter(num => num > 0 && num % 1 == 0).reduce((acum,curr) => acum+curr, 0);
+            return array.filter(num => num % 1 == 0).filter(num => num > 0).map(num => num * num)
+        }
+        let squaredIntegers = squareList([-3,4.8,5,3,-3.2]);
+        console.log(squaredIntegers);
+    </script>
+</body>
+</html>

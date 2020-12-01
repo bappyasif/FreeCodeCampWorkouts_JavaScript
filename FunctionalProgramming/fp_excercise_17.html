@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split String Into Array</title>
+</head>
+<body>
+    <script>
+        function splitify(string) {
+            // return string.split(/[, -.]/);
+            return string.split(/[,-.]/);
+        }
+        console.log(splitify("Hello World, I-am code"));
+
+        let str = "Hello World";
+        let bySpace = str.split(" ");
+
+        let otherStr = "How9are7you4today";
+        let byDigits = otherStr.split(/\d/);
+
+        console.log(bySpace, byDigits);
+    </script>
+</body>
+</html>

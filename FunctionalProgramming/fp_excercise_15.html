@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort An Array Alphabetically</title>
+</head>
+
+<body>
+    <script>
+        function alphabeticalOrder(array) {
+            // return array.sort((a,b)=>a-b);
+            return array.sort((a,b) => a === b ? 0 : a < b ? -1 : 1);
+        }
+        console.log(alphabeticalOrder(["a", "d", "c", "a", "z", "g"]));
+
+        function ascendingOrder(array) {
+            return array.sort((a, b) => a - b);
+        }
+        function desccendingOrder(array) {
+            return array.sort((a, b) => a === b ? 0 : a < b ? 1 : -1)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Array of Objects</title>
+</head>
+<body>
+    <script>
+        function whatIsInName(collection, source) {
+            // return collection.filter(obj => Object.keys(source)
+            // .every(cols => obj[cols] === source[cols]));
+            
+            let sourceKeys = Object.keys(source);
+            return collection.filter(obj => {
+                return sourceKeys.map(key => obj.hasOwnProperty(key) && obj[key] === source[key]);
+            }).reduce((a,b) => a && b);
+
+            
+            // let arr = [];
+            
+            // return collection.filter(obj => Object.keys(source)
+            // .every(cols => obj
+            // .hasOwnProperty(cols) && obj[cols] === source[cols]))
+
+            // return  collection.filter(obj => Object.keys(obj) !== source.hasOwnProperty(Object.keys(obj)))
+            // return Object.keys(collection).every(prop => source.hasOwnProperty(prop) && collection[prop] === source[prop]);
+            // return arr;
+            // return collection.filter(obj => obj.last === source.last)
+            // return collection.filter((prop,obj,collection) => obj.hasOwnProperty(prop) === source.hasOwnProperty(prop))
+        }
+        console.log(whatIsInName([{first: "Romeo", last: "Montague"},
+        {first: "Mercutio", last: null}, {first: "Tybalt", last:"Capulet"}],
+        {last: "Capulet"}));
+    </script>
+</body>
+</html>
+<!--
+    function whatIsInName(collection, source) {
+            let arr = [];
+            for(propName in collection) {
+                console.log(propName, collection[propName]);
+                console.log(propName in Object.keys(source));
+                console.log(propName.hasOwnProperty(Object.keys(source)));
+                // if(collection[propName] === source[propName]) {
+                //     arr.push({propName : collection[propName]})
+                // }
+            }
+            // collection.forEach(obj => {
+            //     console.log(obj, Object.keys(obj), Object.keys(source));
+            //     if(Object.keys(obj) === Object.keys(source)) {
+            //         arr.push(obj);
+            //     }
+            // });
+            return arr;
+            // return collection.filter(obj => obj.last === source.last)
+        }
+-->

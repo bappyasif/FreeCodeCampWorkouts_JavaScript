@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Seek and Destroy</title>
+</head>
+
+<body>
+    <script>
+        function seekElementToDestroy(array) {
+
+            let seek = Array.from(arguments).slice(1);
+            return array.filter(item => !seek.includes(item));
+
+            // let seek = [...arguments].filter(item => typeof(item) !== "object");
+            // return array.filter(item => !seek.includes(item));
+
+            // return [...arguments][1]
+
+            // return seek;
+            // return array;
+
+            // return (arr, ...args) => arr.filter(item => !args.includes(item));
+        }
+        console.log(seekElementToDestroy([1, 2, 3, 1, 2, 3], 2, 3));
+    </script>
+</body>
+
+</html>

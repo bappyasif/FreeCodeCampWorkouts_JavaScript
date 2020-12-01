@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Unchanged Sorted Array</title>
+</head>
+<body>
+    <script>
+        let globalArray = [5,6,3,2,9];
+        function nonMutatingSort(array) {
+            return [...array].sort((a,b)=>a===b ? 0 : a < b ? -1 : 1);
+            // let newArray = [];
+            // newArray = newArray.concat(array);
+            // newArray.sort((a,b)=>a===b ? 0 : a < b ? -1 : 1)
+            // return newArray;
+        }
+        console.log(nonMutatingSort(globalArray));
+    </script>
+</body>
+</html>
