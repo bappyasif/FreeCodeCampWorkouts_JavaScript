@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perform Search and Replace</title>
+</head>
+<body>
+    <script>
+        function searchedReplaced(string, before, after) {
+            let myArr = string.split(" ");
+            let [wordToReplace] = myArr.filter(word => word === before);
+            return wordToReplace[0].toUpperCase() !== wordToReplace[0]
+            ? myArr.map(word => word === before ? after[0].toLowerCase()+after.substring(1) : word).join(" ")
+            : myArr
+            .map(word => word === before ? after[0].toUpperCase()+after.substring(1) : word).join(" ");
+            
+            // if(/[A-Z]/.test(before.charAt(0))) {
+            //     after = after.charAt(0).toUpperCase()+after.substring(1);
+            // } else {
+            //     after = after.charAt(0).toLowerCase()+after.substring(1);
+            // }
+            // return string.replace(before, after);
+
+            // return before.charAt(0).match(/[A-Z]/) 
+            // ? string.replace(before, after.charAt(0).toUpperCase().concat(after.substring(1)))
+            // : before.charAt(0).match(/[a-z]/) 
+            // ? string.replace(before,after.charAt(0).toLowerCase().concat(after.substring(1)))
+            // : string.replace(before, after);
+
+            // return string.replace(before, after);
+        }
+        console.log(searchedReplaced("A quick brown fox jumped over the lazy dog", "jumped", "leaped"));
+        console.log(searchedReplaced("He is Sleeping on the couch", "Sleeping", "sitting"));
+        console.log(searchedReplaced("He is sleeping on the couch", "couch", "Couch"));
+    </script>
+</body>
+</html>

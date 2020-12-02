@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNA Pairing</title>
+</head>
+<body>
+    <script>
+        function pairElement(string) {
+            let pairs = {
+                A: "T",
+                T: "A",
+                C: "G",
+                G: "C"
+            };
+            return string.split("").map(item => [item, pairs[item]]);
+
+            // return string.split('').map(item => 
+            // item === "A" ? [item, "T"]
+            // : item === "T" ? [item, "A"]
+            // : item === "G" ? [item, "C"]
+            // : item === "C" ? [item, "G"]
+            // : [item]);
+        }
+        console.log(pairElement("GCG"));
+        console.log(pairElement("ATCGA"));
+    </script>
+</body>
+</html>

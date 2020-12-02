@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Scripting Pig Latin</title>
+</head>
+<body>
+    <script>
+        function translatePigLatin(string) {
+            return string.replace(/^[aeiou]\w/,"$way")
+            .replace(/(^[^aeiou]+)(\w*)/, "$2$1ay");
+
+            // return string.replace(/^[aeiou]\w/,"$&way")
+            // .replace(/(^[^aeiou]+)(\w*)/, "$2$1ay");
+            
+            // if(string.match(/^[aeiou]+/)) return string+"way";
+            // let cluster = string.match(/^[^aeiou]+/)[0];
+            // return string.substring(cluster.length)+cluster+"ay";
+            // return string.substring()
+
+            // let consonants = /^[^aeiou]+/;
+            // let matchedConsonants = string.match(consonants)
+            // return matchedConsonants !== null ? 
+            // string.replace(consonants,"")
+            // .concat(matchedConsonants).concat("ay")
+            // : string+"way";
+
+            // if(/[aeiou]|[AEIOU]/.test(string.charAt(0))) {
+            //     return string+"way";
+            // } else {
+            //     let count = string.search(/[aeiou]|[AEIOU]/);
+            //     return string.substring(count)+string.substring(0,count)+"ay"
+            // } 
+        }
+
+        console.log(translatePigLatin("consonant"));
+        console.log(translatePigLatin("Gglove"));
+    </script>
+</body>
+</html>
+
+<!--
+
+            function translatePigLatin(string) {
+            if(["a",'e',"i","o","u","A","E","I","O","U"].includes(string.charAt(0))) {
+                return string+"way";
+            } else {
+                let count = string.search(/[aeiou]|[AEIOU]/);
+                return string.substring(count-1)+string.substring(0,count)+"ay"
+            }
+            
+        }
+
+string.split("").forEach(char => {
+                    if(/(?:(?![aeiou])[a-z])/.test(char)) {
+                        count++;
+                    }
+                })
+                return count;
+
+    else {
+                let count = 0;
+                string.split("").forEach(char => {
+                    console.log(char);
+                    // if(/[a-z&&[^aeiouAEIOU]]/.test(char)) {
+                    //     console.log(char);
+                    //     count++;
+                    // }
+                    if(/[BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz]/.test(char)) {
+                        console.log(char);
+                        count++;
+                    }
+                })
+                return count;
+            }
+-->

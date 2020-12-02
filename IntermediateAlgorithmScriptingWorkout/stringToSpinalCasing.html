@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert a String to Spinal Casing</title>
+</head>
+
+<body>
+    <script>
+        function spinalCase(string) {
+            return string.replace(/([a-z])([A-Z])/g,"$1 $2")
+            // .replace(/[\s+_+]/g,"-").toLowerCase();
+
+            // return string.replace(/([a-z])([A-Z])/g,"$1-$2")
+            // .replace(/[\s_]/g,"-").toLowerCase();
+            
+            // return string.replace(/(\w)[._\s]?([A-Z])/g,"$1-$2").toLowerCase();
+
+            // return string.split(/[\s-_]|(([a-z])|([A-Z]))/);
+
+            // return string.replace(/([a-z])([A-Z])|[\s_|]+/g, "$1-$2").toLowerCase();
+
+            // if(/[\s-_]/.test(string)) {
+            //     return string.toLowerCase().split(/[\s-_]/).join("-");
+            // } else {
+            //     return string.replace(/[\s-_]/g,"").split(/(?=[A-Z])|(?=[a-z])+/)
+            // .join("-");
+            // }
+
+            // return string.replace(/[\s-_]/g,"").split(/([A-Z]|[a-z]+)/)
+            // .join("-");
+            
+            // return string.replace(/[\s-_]/g,"")
+        }
+        console.log(spinalCase("This Is Spinal Tap"));
+        console.log(spinalCase("ThisIs spinal-Tap"));
+        console.log(spinalCase("thisIsSpinalTap"));
+        console.log(spinalCase("this_IsSpinal Tap"));
+        console.log(spinalCase("thisIs-Spinal Tap"));
+    </script>
+</body>
+
+</html>
+
+<!--
+
+            // return string.replace(/[\s-_]/g," ").split(/[A-Z]?[a-z]+|[A-Z]+(?![a-z])|\d+/g)
+            // return string.replace(/([\s-_])([A-Z])/g," ").split(/[^a-zA-Z-_]|(^![a-z][A-Z])/g)
+            
+            // return string.replace(/([a-z])([A-Z])|[\s_|]+/g, "$1-$2").toLowerCase();
+            
+            // if (/\s/.test(string)) {
+            //     return string.toLowerCase().split(/[\s-_]/).join("-");
+            // } else {
+            //     return string.split(/(?=[A-Z-_\s])/)
+            //         .map(word => word.toLowerCase()).join("-")
+            // }
+            
+            // return string.replace(/[\s-_]/g,"").split(/(?=[A-Z])/)
+            // .map(word=>word.toLowerCase()).join("-");
+
+
+    let newString = "";
+            if(/[-_]/.test(string)) {
+                let idx = string.search(/[-_]/);
+                // console.log(string.splice(0,idx,1));
+                newString =  string.split(/[-_]/).splice(0,idx,1);
+            } else if(/[\s-_]/) {
+                return string.toLowerCase().split(/[\s-_]/).join("-");
+            }
+            else {
+                return string.split(/(?=[A-Z_-])/).map(word=>word.toLowerCase()).join("-")
+            }
+            return string.split(/(?=[A-Z_-])/).map(word=>word.toLowerCase()).join("-")
+
+    // return string.toLowerCase().split(/[[A-Z] |[a-z]\s-_]/)
+            // .join("-");
+
+            // return string.split(/[a-z]||[A-Z]/)
+            // .join("-");
+
+            // return string.split(/[\s-_]|[A-Z]+/)
+            // .join(/S/);
+-->
