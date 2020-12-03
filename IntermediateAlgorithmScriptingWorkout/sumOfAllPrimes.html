@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of All Primes</title>
+</head>
+
+<body>
+    <script>
+        function sumOfAllPrimes(num) {
+            // generating sequence of numbers untill num from 2
+            let array = Array.from({ length: num + 1 }, (v, k) => k).slice(2);
+            // filtering prime numbers only
+            let primesOnly = array.filter(n => {
+                let m = n - 1;
+                while (m > 1 && m >= Math.sqrt(n)) {
+                    if (n % m === 0) return false;
+                    m--;
+                }
+                return true;
+            });
+            return primesOnly.reduce((a, b) => a + b);
+
+
+            // // generating sequence of numbers untill num
+            // let arr = Array.from({length: num+1}, (v,k) => k).slice(2);
+            // // return arr;
+            // // filtering primes
+            // let onlyPrimes = arr.filter(n=> {
+            //     let m = n-1;
+            //     while(m > 1 && m >= Math.sqrt(n)) {
+            //         if(n%m === 0) return false;
+            //         m--;
+            //     }
+            //     return true;
+            // });
+            // return onlyPrimes.reduce((a,b)=>a+b);
+
+
+
+            // let isPrime = n => {
+            //     for (let i = 2; i < n; i++) {
+            //         if (n % i === 0) return false;
+            //     }
+            //     return n !== 1 && n !== 0;
+            // }
+            // let i = 1;
+            // let sum = 0;
+            // while (i <= num) {
+            //     if (isPrime(i)) {
+            //         sum += i;
+            //     }
+            //     i++;
+            // }
+            // return sum;
+
+            // let primes = [];
+            // for(let i = 0; i <= num; i++) {
+            //     let flag = 0;    
+            //     for(let j = 2; j < i; j++) {
+            //         if(i%j === 0) {
+            //             // console.log(i);
+            //             flag = 1;
+            //             break;
+            //         }
+            //     }
+            //     if(i > 1 && !flag) primes = primes.concat(i);
+            // }
+            // // return primes;
+            // return primes.reduce((a,b)=>a+b);
+        }
+        console.log(sumOfAllPrimes(10));
+        console.log(sumOfAllPrimes(977));
+    </script>
+</body>
+
+</html>
+<!--
+
+
+            // let primes = [];
+            // let isPrime = num => {
+            //     for(let i = 2; i < num; i++) {
+            //         console.log(i, num);
+            //         if(num % i !== 0) {
+            //             console.log(i);
+            //             primes = primes.concat(i);
+            //         }
+            //     }
+            // }
+            // return primes;
+
+-->

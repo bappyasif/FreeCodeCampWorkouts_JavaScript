@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorted Union</title>
+</head>
+<body>
+    <script>
+        function uniteUnique(array) {
+            // let flatArray = [].concat(...arguments);
+            // return [...new Set(flatArray)];
+            
+            let flatArray = [].concat(...arguments);
+            let uniqueArray = flatArray.filter((item, idx) => {
+                return flatArray.indexOf(item) === idx;
+            })
+            // return flatArray;
+            return uniqueArray;
+
+            // let finalArray = [];
+            // for(let i = 0; i < arguments.length; i++) {
+            //     let arrayArguments = arguments[i];
+            //     for(let j = 0; j < arrayArguments.length; j++) {
+            //         if(finalArray.indexOf(arrayArguments[j] < 0)) {
+            //             arrayArguments.push(arrayArguments[j]);
+            //         }
+            //     }
+            // }
+            // return finalArray;
+
+            // let newArray = Array.from(arguments);
+            // console.log(newArray[0]);
+            // let uninqueArray = [];
+            // uninqueArray = uninqueArray.concat(newArray[0]);
+            // for(let i = 0; i < newArray.length; i++) {
+            //     for(let j = 0; j < newArray[i].length; j++) {
+            //         if(!uninqueArray.includes(newArray[i][j])) {
+            //             uninqueArray = uninqueArray.concat(newArray[i][j]);
+            //         }
+            //     }
+            // }
+            // return uninqueArray;
+        }
+        console.log(uniteUnique([1,3,2],[5,2,1,4],[2,1]));
+    </script>
+</body>
+</html>
+
+<!--
+                let newArray = Array.from(arguments);
+            console.log(newArray[0]);
+            let uninqueArray = [];
+            // uninqueArray = uninqueArray.concat([1,2,3]);
+            // console.log(uninqueArray.concat([1,2,3]));
+            uninqueArray = uninqueArray.concat(newArray[0]);
+            for(let i = 0; i < newArray.length; i++) {
+                // uninqueArray.concat(newArray[i]);
+                for(let j = 0; j < newArray[i].length; j++) {
+                    // if(uninqueArray.includes(newArray[i])) {
+                    //     uninqueArray.concat(newArray[i][j]);
+                    // }
+                    // console.log(newArray[i][j])
+                    if(!uninqueArray.includes(newArray[i][j])) {
+                        uninqueArray = uninqueArray.concat(newArray[i][j]);
+                    }
+                }
+            }
+            return uninqueArray;
+
+
+            // let newArray =  Array.from(arguments);
+            // let allArrays =  [];
+            // newArray.forEach(arr => allArrays = allArrays.concat(arr));
+            // return allArrays;
+            
+            
+            // let newArray = Array.from(arguments);
+            // let uniqueArray = [];
+            // for(let i = 0; i < newArray.length; i++) {
+            //     for(let j = 0; j < newArray[i].length; j++) {
+            //         if(uniqueArray.includes(newArray[i][j]) !== -1) {
+            //             uniqueArray.push(newArray[i][j]);
+            //         }
+            //     }
+            // }
+            // return uniqueArray;
+
+            // let newArray =  [...array];
+            // let uniqueArray = [];
+            // newArray.map((arr) => arr.every((elem, idx) => {
+            //     console.log(arr, elem);
+            //     if(arr.includes(elem)) {
+            //         uniqueArray.push(elem);
+            //     }
+            // }))
+            // return uniqueArray;
+-->

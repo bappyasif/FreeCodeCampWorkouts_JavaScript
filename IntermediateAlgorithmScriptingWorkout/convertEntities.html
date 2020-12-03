@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert Tags to HTML</title>
+</head>
+<body>
+    <script>
+        function convertHTML(string) {
+            let htmlEntities = {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&apos;"
+            };
+            // return string.replace(/([<>&'"])/g, match => htmlEntities[match]);
+            return string
+            .split("")
+            .map(el => htmlEntities[el] || el)
+            .join("");
+
+
+            // let charArray = string.split('');
+            // for(let i = 0; i < charArray.length; i++) {
+            //     switch(charArray[i]) {
+            //         case "&":
+            //         charArray[i] = "&amp;"
+            //         break;
+            //         case "<":
+            //         charArray[i] = "&lt;"
+            //         break;
+            //         case ">":
+            //         charArray[i] = "&gt;"
+            //         break;
+            //         case "'":
+            //         charArray[i] = "&apos;"
+            //         break;
+            //         case '"':
+            //         charArray[i] = "&quot;"
+            //         break;
+            //     }
+            // }
+            // return charArray.join("");
+
+
+            // let htmlEntities = {
+            //     "&": "&amp;",
+            //     "<": "&lt;",
+            //     ">": "&gt;",
+            //     '"': "&quot;",
+            //     "'": "&apos;"
+            // };
+            // for(let i in htmlEntities) {
+            //     // string = string.replace(/[&<>"']/, htmlEntities[i]);
+            //     string = string.replace(new RegExp(i, 'g'), htmlEntities[i]);
+            // }
+
+            // return string;
+        }
+        console.log(convertHTML("Dolce & Gabbana"));
+        console.log(convertHTML("<>"));
+        console.log(convertHTML("Schlinder's List"));
+    </script>
+</body>
+</html>
+
+<!--
+                // return string.split("").map(el => {
+            //     if(/[&<>"']/.test(el)) {
+            //         return string.replace(el, htmlEntities[el]);
+            //     }
+            //     // return string.replace(el, htmlEntities[el]);
+            // }).join("");
+-->
