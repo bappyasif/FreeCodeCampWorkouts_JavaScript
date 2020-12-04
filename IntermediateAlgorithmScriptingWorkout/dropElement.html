@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop Elements Matching Condition</title>
+</head>
+<body>
+    <script>
+        function dropElements(array, func) {
+            while(array.length > 0 && !func(array[0])) array.shift();
+            // while(array.length > 0) array.shift();
+            return array;
+
+            // return array.filter(n=>func(n));
+           
+             // return array.slice(array.findIndex(func) >= 0 ? array.findIndex(func) : array.length)
+        }
+        // console.log(dropElements([1,2,3],function(n){return n>=2}));
+        // console.log(dropElements([1,2,3],function(n){return n<2}));
+        console.log(dropElements([1,2,3], n => n < 2));
+        // console.log(dropElements([1,2,3], n => n > 2));
+    </script>
+</body>
+</html>
+
+<!--
+    // let times = array.length;
+            // for(let i = 0; i < times; i++) {
+            //     if(func(array[i])) {
+            //         break;
+            //     } else {
+            //         array.shift();
+            //     }
+            // }
+            // return array;
+            
+            // return array.map(n => {
+            //     if(!func(n)) array.shift();
+            // })
+-->

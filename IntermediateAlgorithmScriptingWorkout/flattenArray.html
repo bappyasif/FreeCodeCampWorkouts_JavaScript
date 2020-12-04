@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flatten A Nested Array</title>
+</head>
+
+<body>
+    <script>
+        function steamrollArray(array, flatArr=[]) {
+            array.forEach(item => {
+                if(Array.isArray(item)) steamrollArray(item, flatArr);
+                else flatArr.push(item);
+            });
+            return flatArr;
+            
+            
+            // let flatten = [].concat(...array);
+            // return flatten.some(Array.isArray)?steamrollArray(flatten):flatten;
+
+
+            // let flattenArray = [];
+            // // add, if it's not an array
+            // let flatten = item => {
+            //     if(!Array.isArray(item)) {
+            //         flattenArray.push(item);
+            //     } else {
+            //         for(let el in item) {
+            //             flatten(item[el]);
+            //         }
+            //     }
+            // }
+            // // flattening al array elements
+            // array.forEach(flatten);
+            // return flattenArray;
+
+            // let flattenArray  = array.reduce((acc,val)=>acc.concat(val),[])
+            // for(let i = 0; i < flattenArray.length; i++) {
+            //     while(Array.isArray(flattenArray[i])) {
+            //         flattenArray[i] = flattenArray[i].reduce((a,b)=>a.concat(b));
+            //     }
+            // }
+            // return flattenArray;
+        }
+        console.log(steamrollArray([1, [2], [3, [4]]]));
+        console.log(steamrollArray([1, [2], [3, [[4]]]]));
+    </script>
+</body>
+
+</html>
+<!--
+    // let flattenArray  = array.reduce((acc,val)=>acc.concat(val),[])
+            // for(let i = 0; i < flattenArray.length; i++) {
+            //     while(Array.isArray(flattenArray[i])) {
+            //         flattenArray[i] = flattenArray[i].reduce((a,b)=>a.concat(b));
+            //     }
+            // }
+            // return flattenArray;
+
+
+            // let flattenArray = (arr, d = 1) => d > 0
+            //     ? arr.reduce((acc, val) => acc.concat(Array.isArray(val)
+            //         ? flattenArray(val, d - 1)
+            //         : val), [])
+            //     : arr.slice();
+            // return flattenArray(array, Infinity);
+
+            // return array.flat(3);
+            // return array.reduce((acc,val)=>acc.concat(val),[]);
+            // let flatten = array => [].concat(...array);
+            // return flatten(array);
+            // return Array.isArray(array)
+
+            // let newArray = [];
+            // for(let i = 0; i < [...array].length; i++) {
+            //     for(let j = 0; j < [...array][i].length; j++) {
+            //         newArray.push(array[i][j]);
+            //     }
+            // }
+            // return newArray;
+-->
