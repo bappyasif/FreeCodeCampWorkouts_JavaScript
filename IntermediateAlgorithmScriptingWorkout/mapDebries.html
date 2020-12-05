@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbital Period</title>
+</head>
+<body>
+    <script>
+        function orbitalPeriod(array) {
+            let GM = 398600.4418;
+            let earthRadius = 6367.4447;
+        
+            return array.map(({name,avgAlt}) => {
+                // console.log(name,avgAlt);
+                let earth = earthRadius+avgAlt;
+                let orbitalPeriod = Math.round(2*Math.PI*Math.sqrt(Math.pow(earth, 3)/GM));
+                return {name, orbitalPeriod}
+            });
+            
+            // let newArray = JSON.parse(JSON.stringify(array));
+            // newArray.forEach(item=>{
+            //     let temp = Math.round(2*Math.PI*Math.sqrt(Math.pow(earthRadius+item.avgAlt, 3)/GM));
+            //     delete item.avgAlt;
+            //     item.orbitalPeriod = temp;
+            // });
+            // return newArray;
+            
+        }
+        console.log(orbitalPeriod([{name:"Sputnik", avgAlt: 35873.5553}]));
+    </script>
+</body>
+</html>
+
+<!--
+    return array.every(item=>{
+                // console.log(item);
+                if(item.hasOwnProperty("avgAlt")) {
+                    // console.log(item);
+                    // delete item["avgAlt"];
+                    // console.log(item);
+                    item["orbitalPeriod"] = Math.ceil(2*Math.PI*Math.sqrt((Math.pow(item.avgAlt+earthRadius, 3))/GM));
+                    // item["orbitalPeriod"] = Math.floor(2*Math.PI*Math.sqrt((Math.pow(item.avgAlt+earthRadius, 3))/GM));
+                    delete item["avgAlt"];
+                    console.log(item);
+                }
+            });
+-->

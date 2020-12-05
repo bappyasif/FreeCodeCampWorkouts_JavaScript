@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arguments Optional Add Together</title>
+</head>
+
+<body>
+    <script>
+        function addTogether() {
+            let args = Array.from(arguments);
+            return args.some(el=> !Number.isFinite(el))
+            ? undefined
+            : args.length > 1
+            ? args.reduce((a,b)=>a+b,0)
+            : n => Number.isFinite(n) ? n+args[0] : undefined;
+        }
+        console.log(addTogether(2, 3));
+        console.log(addTogether(2)(3));
+        console.log(addTogether(2, "3"));
+
+    </script>
+</body>
+
+</html>
+
+<!--
+                if (
+                [...arguments].length > 1
+                &&
+                [...arguments]
+                    .every(el => Number.isFinite(el))) {
+                return [...arguments].reduce((a, b) => a + b);
+            } else if ([...arguments].length === 1) {
+                let sum = x => [...arguments][0] += x;
+                return sum;
+            } else {
+                return undefined;
+            }
+
+
+                let add = 0;
+            if([...arguments].length  > 1 && [...arguments].every(el=>typeof(el) === "number")) {
+                return [...arguments].reduce((a,b)=>a+b);
+            } else if([...arguments].length === 1) {
+                // return sum => add+=sum;
+                // let sum = x => sum+=x;
+                // let sum = x => x+= addTogether(sum);
+                let sum = x => [...arguments][0]+=x;
+                return sum;
+            } else {
+                return undefined;
+            }
+-->

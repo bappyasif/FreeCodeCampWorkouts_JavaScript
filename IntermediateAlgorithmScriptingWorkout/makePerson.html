@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Person Object</title>
+</head>
+
+<body>
+    <script>
+        let Person = function (firstAndLast) {
+            let fullName = firstAndLast;
+            this.getFirstName = function () { return fullName.split(" ")[0]; }
+            this.getLastName = function () { return fullName.split(" ")[1]; }
+            this.getFullName = function () { return fullName };
+            this.setFirstName = function (fn) { fullName = fn + " " + fullName.split(" ")[1]; }
+            this.setLastName = function (ln) { lastName = fullName.split(" ")[0] + " " + ln; }
+            this.setFullName = function (sf) { fullName = sf };
+            return firstAndLast;
+        }
+
+        let bob = new Person("Bob Ross");
+        // console.log(bob.getFullName(), bob.firstName, bob.lastName, Object.keys(bob).length);
+        console.log(bob.getFullName(), bob.getFirstName(), bob.getLastName(), Object.keys(bob).length);
+        // bob.firstName = "bobChanged";
+        // bob.lastName = "rossChanged";
+        // Person.prototype = new Base();
+        console.log(bob.getFullName(), bob.firstName, bob.lastName, Object.keys(bob).length);
+    </script>
+</body>
+
+</html>
+
+<!--
+    Person.prototype = Object.create(Base.prototype);
+        Person.prototype.constructor = Person;
+
+function Base(fn,ln,fnl){
+            this.fn = fn;
+            this.ln = fn;
+            this.fnl = fnl;
+            this.setFirstName = function (fn) {this.fn = fn}
+            this.setLastName = function (ln) {this.ln = ln}
+            this.getFirstName =  function() {return this.fn};
+            this.getLastName =  function() {return this.ln};
+        }
+        let Person = function(firstAndLast){
+            Base.call(this);
+            // this.firstAndLast = firstAndLast;
+            // this.firstName;
+            // this.lastName;
+            // this.getFirstName =  function() {return firstAndLast.split(" ")[0]};
+            // this.getLastName =  function() {return firstAndLast.split(" ")[1]};
+            // this.setFirstName = function (fn) {Base.fn = fn; return this.fn;}
+            // this.setLastName = function (ln) {Base.ln = ln; return this.ln;}
+            // this.setFullName = function (fl) {firstAndLast = fl}
+            // this.getFullName = () => firstAndLast;
+            
+            // this.getFirstName =  function() {return this.fn};
+            // this.getLastName =  function() {return Base(this.ln)};
+            // this.setFirstName = function (fn) {Base(fn)}
+            // this.setLastName = function (ln) {Base(ln)}
+            // this.setFullName = function (fnl) {Base(fnl)}
+            // this.getFullName = () => this.firstName+" "+this.lastName;
+
+            return firstAndLast;
+
+    this.firstAndLast = firstAndLast;
+            this.firstName = this.firstAndLast.split(" ")[0];
+            this.lastName = this.firstAndLast.split(" ")[1];
+            this.getFirstName =  function() {return this.firstName};
+            this.getLastName =  function() {return this.lastName};
+            this.setFirstName = function (fn) {this.firstName = fn}
+            this.setLastName = function (ln) {this.lastName = ln}
+            this.setFullName = function (fl) {this.firstAndLast = fl}
+            this.getFullName = () => this.firstName+" "+this.lastName;
+            return firstAndLast;
+-->

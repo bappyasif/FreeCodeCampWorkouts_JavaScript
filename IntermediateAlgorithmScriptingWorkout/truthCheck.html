@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth Check</title>
+</head>
+
+<body>
+    <script>
+        function truthCheck(collection, preCond) {
+            // return collection.every(item => item[preCond]);
+            // return collection.every(item => Boolean(item[preCond]));
+            return collection.every(item => item.hasOwnProperty(preCond) && Boolean(item[preCond]));
+            // return collection.every(item => item.hasOwnProperty(preCond));
+        }
+        console.log(truthCheck([{ "user": "Tinky-Winky", "sex": "male" }, 
+        { "user": "Dipsy", "sex": "male" }, 
+        { "user": "Laa-Laa", "sex": "female" }, 
+        { "user": "Po", "sex": "female" }], "sex"));
+        console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male"}, 
+        {"user": "Dipsy"}, 
+        {"user": "Laa-Laa", "sex": "female"}, 
+        {"user": "Po", "sex": "female"}], "sex"));
+        console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male"}, 
+        {"user": "Dipsy", "sex": "male"}, 
+        {"user": "Laa-Laa", "sex": "female"}, 
+        {"user": "Po", "sex": "female"}], "sex"));
+        console.log(truthCheck([{"name": "Pete", "onBoat": true}, 
+        {"name": "Repeat", "onBoat": true}, 
+        {"name": "FastForward", "onBoat": null}], "onBoat"))
+    </script>
+</body>
+
+</html>
+
+<!--
+    for(let key in item) {
+                    // if(item.hasOwnProperty(preCond)) {
+                    //     return true
+                    // } else {
+                    //     return false;
+                    // }
+                    if(item[key]!==null && Object.keys(item).some(item=>item===preCond)) {
+                        return true
+                    } else {
+                        return false;
+                    }
+                    // item.hasOwnProperty(preCond)?true:false;
+                    // key?true:false;
+                }
+
+// for(let i in collection) {
+            //     // console.log(collection[i])   
+            //     for(let k in collection[i]) {
+            //         // console.log(k);
+            //         // return collection[i][k] == preCond
+            //         console.log(k,collection[i])
+            //     }
+            // }
+            // return collection.map((item,idx) => item[preCond]=== collection[idx].hasOwnProperty(preCond))
+            // return collection.map(item => item.hasOwnProperty(preCond))
+
+
+    // return Object.entries(collection);
+            
+            // for(let i in collection) {
+            //     // return Object.entries(collection);
+            //     // return Object.keys(collection[i]).hasOwnProperty(preCond);
+            //     // return Object.keys(collection[i]);
+            //     // if(collection[i].hasOwnProperty(preCond)) return true;
+            //     let keys = Object.keys(collection[i]);
+            //     // return keys.every(item=>item===preCond);
+            //     // if(keys.find(item=>item===preCond)) {
+            //     //     return keys.every(item=>item===preCond);
+            //     // }
+
+            //     return collection.every(obj=>collection[i].hasOwnProperty(preCond));
+
+            //     // console.log(collection[i].hasOwnProperty(preCond));
+            //     // return collection[i].some(item=>item === preCond).hasOwnProperty(preCond)
+            //     // let chk="";
+            //     // collection[i].forEach(item=>item===preCond?chk=true:chk=false)
+            //     // return chk;
+            //     // console.log(collection[i].forEach(item=>item===preCond?chk=true:chk=false));
+            // }
+            // // return collection.filter(item=>collection[item].hasOwnProperty(preCond));
+-->
