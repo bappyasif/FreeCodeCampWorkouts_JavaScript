@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert To Roman Number</title>
+</head>
+
+<body>
+    <script>
+        function convertToRomanNumerals(num) {
+            let getNumerals = (digit, low, mid, next) => {
+                switch (true) {
+                    case digit <= 3:
+                        return low.repeat(digit);
+                    case digit === 4:
+                        return low + mid;
+                    case digit <= 8: // 5-8
+                        return mid + low.repeat(digit - 5);
+                    default: // 9,49,99,400,900....
+                        return low + next;
+                }
+            }
+
+            let resultedStr = "";
+            // num multiple of 1000's
+            resultedStr += "M".repeat(Math.floor(num / 1000));
+            num %= 1000;
+            // num multiple of 100's
+            resultedStr += getNumerals(Math.floor(num / 100), "C", "D", "M");
+            num %= 100;
+            // num multiple of 10's
+            resultedStr += getNumerals(Math.floor(num / 10), "X", "L", "C");
+            num %= 10;
+            // num multiple of 1's
+            resultedStr += getNumerals(num, "I", "V", "X");
+            return resultedStr;
+
+
+
+            // let decimalValue = [100, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+            // let romanValues = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
+            // let romanized = "";
+            // decimalValue.forEach((el, idx) => {
+            //     while (decimalValue[idx] <= num) {
+            //         romanized += romanValues[idx];
+            //         num -= decimalValue[idx];
+            //     }
+            // });
+            // return romanized;
+        }
+        console.log(convertToRomanNumerals(36));
+        console.log(convertToRomanNumerals(499));
+        console.log(convertToRomanNumerals(4));
+        console.log(convertToRomanNumerals(5));
+    </script>
+</body>
+
+</html>
+
+<!--
+            if (num - 1000 >= 0) return "M" + convertToRomanNumerals(num - 1000);
+            if (num - 900 >= 0) return "CM" + convertToRomanNumerals(num - 900);
+            if (num - 500 >= 0) return "D" + convertToRomanNumerals(num - 500);
+            if (num - 400 >= 0) return "CD" + convertToRomanNumerals(num - 400);
+            if (num - 100 >= 0) return "C" + convertToRomanNumerals(num - 100);
+            if (num - 90 >= 0) return "XC" + convertToRomanNumerals(num - 90);
+            if (num - 50 >= 0) return "L" + convertToRomanNumerals(num - 50);
+            if (num - 40 >= 0) return "XL" + convertToRomanNumerals(num - 40);
+            if (num - 10 >= 0) return "X" + convertToRomanNumerals(num - 10);
+            if (num - 9 >= 0) return "IX" + convertToRomanNumerals(num - 9);
+            if (num - 5 >= 0) return "V" + convertToRomanNumerals(num - 5);
+            if (num - 4 >= 0) return "IV" + convertToRomanNumerals(num - 4);
+            if (num - 1 >= 0) return "I" + convertToRomanNumerals(num - 1);
+            return "";
+
+
+    let symbols = {
+                1: "I",
+                5: "V",
+                10: "X",
+                50: "L",
+                100: "C",
+                500: "D",
+                1000: "M"
+            }
+            let keys = [];
+            let syms = [];
+            if (symbols[num]) {
+                return symbols[num];
+
+            } else if (symbols[num + 1]) {
+                // return symbols[1].push(symbols[num+1]).join("")
+                return symbols[1]+symbols[num+1];
+            } else {
+                for (let prop in symbols) {
+                    if (num > prop) {
+                        keys = keys.concat(prop);
+                    }
+                }
+
+                keys.sort((a, b) => b - a);
+
+                let romansEq = [];
+                while (num >= 0) {
+                    let calc = num - keys[0];
+                    // console.log(calc,num);
+                    romansEq.push(keys[0]);
+                    // if(calc <= keys[0]) {
+                    //     keys.shift();
+                    // }
+                    num = calc;
+                    if (calc < keys[0]) {
+                        keys.shift();
+                        // romansEq.push(keys[0]);
+                    }
+                }
+
+                romansEq.forEach(el => syms.push(symbols[el]));
+                return syms.join("");
+            }
+            
+    
+    for(let prop in symbols) {
+                // console.log(prop, symbols[prop])
+                if(num > prop) {
+                    keys = keys.concat(prop);
+                }
+            }
+            keys.sort((a,b)=>b-1);
+            // for(let i = num; i > 0; i--) {
+            //     num = num - keys[keys.length-1];
+            //     syms.push(sy)
+            // }
+            let romansEq = [];
+            while(+num > 0) {
+                let calc = +num - keys[0];
+                console.log(calc,num);
+                // romansEq.push(keys[0]);
+                romansEq.push(keys[0]);
+                if(calc <= keys[0]) {
+                    keys.shift();
+                    // romansEq.push(keys[0]);
+                }
+
+                num = calc;
+                // romansEq.push(keys[0]);
+            }
+
+            romansEq.forEach(el=>syms.push(symbols[el]));
+            
+            // return symbols[1];
+            // console.log(keys, romansEq);
+            // console.log(syms);
+            return syms.join("");
+
+
+
+                // for(let i = num; i >= 0; i--) {
+            //     // let calc = 0;
+            //     // syms.push(symbols[Math.max(...keys)]);
+            //     num = num - Math.max(...keys);
+            //     i = num;
+            //     console.log(i,num);
+            //     if(num < Math.max(...keys)) {
+            //         syms = syms.concat(symbols[Math.max(...keys)]);
+            //         keys.pop();
+            //     }
+            // }
+
+
+
+                let keys = [];
+            let syms = [];
+
+            if ([1, 5, 10, 50, 100, 500, 1000].includes(num)) {
+                return symbols[num];
+            } else {
+                for (let n in symbols) {
+                    // console.log(n);
+                    if (n < num) {
+                        //  let keys = [].push(n);
+                        keys = keys.concat(n);
+                        //  console.log(keys);
+                        // for (let i = num; i >= 0; i--) {
+                        //     let calc = 0;
+                        //     syms = syms.concat(symbols[Math.max(...keys)]);
+                        //     console.log(Math.max(...keys));
+                        //     num = num - Math.max(...keys);
+                        //     console.log(num);
+                        //     i = num;
+                        // }
+                    }
+                }
+                for (let i = num; i >= 0; --i) {
+                    // let calc = 0;
+                    syms = syms.concat(symbols[Math.max(...keys)]);
+                    // keys.splice(0, keys.length);
+                    
+                    console.log(Math.max(...keys));
+                    num = num - Math.max(...keys);
+                    // console.log(num);
+                    i = num;
+
+                    if(i <= Math.max(...keys)) {
+                        keys.pop();
+                    }
+
+                }
+            }
+-->

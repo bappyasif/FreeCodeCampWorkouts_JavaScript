@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+</head>
+
+<body>
+    <script>
+        function palindromeChecker(string) {
+            let front = 0;
+            let back = string.length -1;
+            while(back > front) {
+                if(string[front].match(/[\W_]/)) {
+                    front++;
+                    continue;
+                } else if(string[back].match(/[\W_]/)) {
+                    back--;
+                    continue;
+                } else if(string[front].toLowerCase() !== string[back].toLowerCase()) return false;                
+                front++;
+                back--;
+            }
+            return true;
+
+            // return string.replace(/[\W_]/g, "").toLowerCase()
+            // === string.replace(/[\W_]/g,"")
+            // .toLowerCase()
+            // .split("")
+            // .reverse()
+            // .join("");
+        }
+        console.log(palindromeChecker("e ye"));
+        console.log(palindromeChecker("A man, a plan, a canal. Panama"));
+        console.log(palindromeChecker("0_0 (: /-\ :) 0-0"));
+        console.log(palindromeChecker("never odd or even"));
+    </script>
+</body>
+
+</html>
+
+<!--
+
+                // let modStr = "";
+            // if (string.match(/[+(_\s.,)]/)) {
+            //     string.split("").forEach(el => {
+            //         if (el.match(/[_-\s,.]/)) {
+            //             let idx = string.search(el);
+            //             // modStr = string.replace(el, "").replace(/[+(\s_,.)]/g, "");
+            //             modStr = string.toLowerCase().replace(el, "").replace(/[+(-\s_,.)]/g, "");
+            //             // console.log(modStr);
+            //         }
+            //     });
+            // } else {
+            //     modStr = string.toLowerCase();
+            // }
+            // // return string.split("")
+            // return modStr.split("").reverse().join("") === modStr;
+            // // return modStr;
+
+
+string.toLowerCase().split("").forEach(el => {
+                    if (el.match(/[0-9_-\s,.]/)) {
+                        let idx = string.search(el);
+                        // modStr = string.replace(el, "").replace(/[_\s]+/, "").replace(" ","");
+                        modStr = string.replace(el, "").replace(/[+(\s_)]/g,"");
+                        // return modStr.split("").reverse().join("") === modStr;
+
+                    } 
+                    // else {
+                    //     // return string.split("").reverse().join("") === string;
+                    //     // console.log(string.split("").reverse().join("") === string);
+                    //     // modStr = string;
+                    // }
+                });
+
+let modStr = "";
+            if (string.match(/[\s]/)) {
+                // modStr = string.split(" ").forEach(el=>modStr.concat(el));
+                string.split(" ").forEach(el=>modStr = modStr.concat(el));
+                console.log(modStr);
+                
+            } else {
+                string.toLowerCase().split("").forEach(el => {
+                    if (el.match(/[0-9_-\s,.]/)) {
+                        let idx = string.search(el);
+                        modStr = string.replace(el, "").replace(/[0-9_]/, "");
+                    }
+                });
+                // return modStr.split("").reverse().join("") === modStr;
+                // return modStr;
+
+string.toLowerCase().split("").forEach(el=>{
+                if(el.match(/[0-9_-\s,.]/)) {
+                    let idx = string.search(el);
+                    modStr = string.replace(el,"").replace(/[0-9_]/,"");
+                }
+            });
+            return modStr.split("").reverse().join("") === modStr;
+
+
+ // if (/\s|\./.test(string)) {
+            //     let modStr = [].concat(string.split(/\s\|./)).toString();
+            //     let idx = modStr.search(modStr.match(/\s./));
+            //     modStr = modStr.substring(0, idx).concat(modStr.substring(idx + 1));
+            //     return modStr.split("").reverse().join("") === modStr;
+            //     // return idx;
+            // } else {
+            //     let idx = string.search(string.match(/[0-9_-]/));
+            //     // console.log(idx)
+            //     let modStr = string.substring(idx + 1)
+            //     return modStr.split("").reverse().join("") === modStr;
+            //     // return string.remove(/[0-9_]/,"").split("").reverse().join("") === string;
+            // }
+
+            // let idx = string.search(string.match(/[0-9_-]/));
+            // // console.log(idx)
+            // let modStr = string.substring(idx + 1)
+            // return modStr.split("").reverse().join("") === modStr;
+
+
+
+            let modStr = "";
+            // if(string.match(/[0-9_-\s,.]/)) {
+            //     let idx = string.search(string.match(/[0-9-_\s.]/));
+            //     return idx;
+            // }
+            string.toLowerCase().split("").forEach(el=>{
+                if(el.match(/[0-9_-\s,.]/)) {
+                    let idx = string.search(el);
+                    console.log(el,idx);
+                    // modStr = modStr.substring(0,idx).concat(modStr.substring(idx+1));
+                    // modStr = string.slice(0,idx).concat(string.slice(idx+1));
+                    // console.log(modStr);
+                    if(idx === 0) {
+                        modStr = string.replace(el,"");
+                        console.log(modStr);
+                    } else {
+                        modStr = string.slice(0,idx).concat(string.slice(idx+1));
+                    }
+                }
+            });
+            return modStr;
+
+if (/\s|\./.test(string)) {
+                let modStr = [].concat(string.split(/\s\|./)).toString();
+                // let modStr = [].concat(string.split(/\s\|./));
+                // let idx = modStr.findIndex(item=>item.match(/\s./));
+                // let idx = modStr.findIndex(item=>/\s./.test(item));
+                // let idx = modStr.find(item=>/\s|./.test(item));
+                // let idx = modStr.find(item=>[" ","."].includes(item));
+                let idx = modStr.search(modStr.match(/\s./))
+                modStr = modStr.substring(0,idx).concat(modStr.substring(idx+1))
+                return modStr.split("").reverse().join("") === modStr;
+                // return idx;
+            } else {
+                let idx = string.search(string.match(/[0-9_-]/));
+                // console.log(idx)
+                let modStr = string.substring(idx + 1)
+                return modStr.split("").reverse().join("") === modStr;
+                // return string.remove(/[0-9_]/,"").split("").reverse().join("") === string;
+            }
+
+    let idx = string.search(string.match(/[0-9_-]/));
+            // console.log(idx)
+            let modStr = string.substring(idx+1)
+            return modStr.split("").reverse().join("") === modStr;
+            // return string.remove(/[0-9_]/,"").split("").reverse().join("") === string;
+-->
