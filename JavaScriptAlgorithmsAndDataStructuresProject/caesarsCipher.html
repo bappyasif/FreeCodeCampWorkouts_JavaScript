@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesars Cipher</title>
+</head>
+
+<body>
+    <script>
+        function caesarCipherRot13(string) {
+            let abc = ["A","B","C","D","E","F","G","H","I","J","K","L","M"];
+            let nop = ["N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+            let array = string.split("");
+            for(let i = 0; i < array.length; i++) {
+                for(let j = 0; j < abc.length; j++) {
+                    if(array[i] === abc[j]) {
+                        array[i] = nop[j];
+                    } else if(array[i] === nop[j]) {
+                        array[i] = abc[j];
+                    }
+                }
+            }
+            
+            return array.join("");
+            
+            // let alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            // return string.split("")
+            //     .map(char => {
+            //         let pos = alphabets.indexOf(char);
+            //         return pos >= 0 ? alphabets[(pos + 13) % 26] : char
+            //     }).join("");
+
+
+
+            // return string.replace(/[A-Z]/g, letter => {
+            //     return String.fromCharCode(letter.charCodeAt(0) % 26 + 65)
+            // });
+
+
+            // return string.split(" ")
+            //     .map(word => word.split("")
+            //         .map(char => {
+            //             let code = char.charCodeAt(0);
+            //             // let shift = ((code - 65 + 13) % 26) + 65;
+            //             let shift = code % 26 + 65;
+            //             if (code < 65 || code > 90) { shift = code; }
+            //             // if (code > 64 && code < 90) { shift = shift }
+            //             return String.fromCharCode(shift);
+            //         })
+            //         .join(""))
+            //     .join(" ");
+
+
+            // return string.split(" ")
+            //     .map(word => word.split("")
+            //         .map(char => {
+            //             let code = char.charCodeAt(0);
+            //             let shift = code - 13;
+            //             if (code < 65 || code > 90) { shift = code; }
+            //             if (code > 64 && code < 78) { shift = code + 13 }
+            //             return String.fromCharCode(shift);
+            //         })
+            //         .join(""))
+            //     .join(" ");
+        }
+        console.log(caesarCipherRot13("SERR PBQR PNZC"));
+        console.log(caesarCipherRot13("SERR CVMMN!"));
+        console.log(caesarCipherRot13("SERR YBIR?"));
+    </script>
+</body>
+
+</html>
+
+<!--
+            return string.split(" ")
+            .map(word => word.split("")
+            .map(char=>{
+                let code = char.charCodeAt(0);
+                let shift = code - 13;
+                // let shift;
+                if(code < 65 || code > 90) {shift = code;}
+                // if(code < 78) {shift = code+26-13}
+                if(code > 64 && code < 78) {shift = code+13}
+                // // if(shift >32 && shift < 65)shift = char.charCodeAt(0);
+                // if(code < 65) shift = 90 - (65 - shift - 1);
+                // // else code = char.charCodeAt(0);
+                // if(code >32 && code < 65)shift = char.charCodeAt(0);
+            return String.fromCharCode(shift);
+            })
+            .join(""))
+            .join(" ");
+
+
+            return string.split(" ")
+            .map(word => word.split("")
+            .map(char=>{
+                let code = char.charCodeAt(0);
+                let shift = code - 13;
+                if(shift < 65) shift = 90 - (65 - shift - 1);
+                // else code = char.charCodeAt(0);
+                if(shift < 65)shift = char.charCodeAt(0);
+            return String.fromCharCode(shift);
+            })
+            .join(""))
+            .join(" ");
+
+                return string.split(" ")
+            .map(word => word.split("")
+            .map(char=>{
+                let code = char.charCodeAt(0) -13;
+                // let shift = code >= 65 && code <= 90 ? code = 65 
+                // : code >= 97 && code <= 122 ? code = 97 : code = 0;
+                if(code < 65) code = 90 - (65 - code - 1)
+            //    return String.fromCharCode(char.charCodeAt(0)-13);
+            return String.fromCharCode(code);
+            })
+            .join(""))
+            .join(" ");
+-->
