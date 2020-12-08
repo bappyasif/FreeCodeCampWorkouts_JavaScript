@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Cash Register Drawer</title>
+</head>
+
+<body>
+    <script>
+        function checkCashRegister(price, cash, cid) {
+            let billsChange;
+            // return billsChange;
+            let currencyUnits = {
+                PENNY: .01,
+                NICKEL: .05,
+                DIME: .1,
+                QUARTER: .25,
+                ONE: 1,
+                FIVE: 5,
+                TEN: 10,
+                TWENTY: 20,
+                "ONE HUNDRED": 100
+            };
+            billsChange = cash - price;
+            console.log("",billsChange);
+            // console.log(billsChange + 10000000000);
+            let availableUnits = {};
+            let funds = 0;
+            let inFunds = { status: "Insufficient Funds", change: [] };
+            let closed = { status: "Closed", change: [] };
+            let open = { status: "Open", change: [] };
+            let result;
+            cid.forEach(item => {
+                // let funds = 0;
+                let key = item[0];
+                availableUnits[key] = item[1];
+                funds += availableUnits[key];
+            });
+
+            funds = +funds.toFixed(2);
+
+            // if (funds < billsChange) result = inFunds;
+            // console.log("checked");
+            if (funds < billsChange) {
+                result = inFunds;
+                // break;
+            }else {
+                // 
+                let tempUnit = Object.keys(currencyUnits);
+                let tempFigs = Object.values(currencyUnits);
+                // console.log(tempUnit[0], temFigs[0]);
+
+                let temps = Object.values(cid);
+                // console.log(temps);
+                // let temKeys = Object.keys(temps);
+                let tempVals = Object.values(temps);
+                // console.log(tempVals);
+
+                for(let i = 0; i < tempVals.length; i++) {
+                    // console.log(tempVals[i][1], tempUnit[i])
+                    // console.log(tempVals[i][1]-tempFigs[i], tempFigs[i], billsChange);
+                    // console.log(tempVals[i][1] * tempFigs[i] < billsChange);
+                    
+                    // if(tempVals[i][1] * tempFigs[i] < billsChange) {
+                    //     console.log(tempVals[i][1], tempFigs[i])
+                    // }
+
+                    if(tempVals[i][1] * tempFigs[i] <= billsChange) {
+                        console.log(tempVals[i][1]  * tempFigs[i], tempFigs[i]);
+                    }
+
+                }
+
+
+            }
+
+            return resulte;
+        }
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+    </script>
+</body>
+
+</html>
+
+<!--
+
+
+
+    // console.log(cid[0]);
+                // let temp = []; 
+                // // cid.forEach(item=>temp.push(Object.entries(item)));
+                // cid.forEach(item=>temp.push(Object.values(item)));
+                // // console.log(temp, temp[0][1]);
+                // // let blalance = 0;
+                // temp.sort((a,b)=>b-a);
+                // // while(billsChange>=0) {
+                // //     let blalance = billsChange - temp[0][1];
+                // //     billsChange = blalance;
+                // //     console.log(billsChange, temp[0][1]);
+                // //     if(billsChange < temp[0][1]) {
+                // //         // temp.splice(2, temp.length);
+                // //         temp.splice(0,1);
+                // //         console.log(temp[1], temp, temp[0][2], temp[2], temp[0]);
+                // //         closed.change.push(temp[1]);
+                // //         result = closed;
+                // //     }
+                // // }
+                // for(let i = 0; i < temp.length; i++) {
+                //     // for(let j = 0; j < temp[i].length; j++) {
+                //     //     console.log(temp[i][j], temp[i], temp[j])
+                //     // }
+                //     // console.log(temp[i]);
+                //     // let balance = billsChange - temp[i][1];
+                //     // // let balance = temp[i][1] - billsChange;
+                //     // console.log(billsChange, balance);
+                //     // whilee(balance >= 0) {
+                //     //     closed.change.push(temp[i][0]);
+                //     // }
+                //     if(temp[i][1]>=billsChange) {
+                //         console.log(temp[i][1]);
+                //     }
+                    
+                // }
+
+
+                // let temp = Object.entries(currencyUnits);
+            let temp = Object.values(currencyUnits);
+
+            let tempKeys = Object.keys(currencyUnits);
+
+            tempKeys.sort((a,b)=>b-a);
+
+            temp = temp.sort((a, b) => b - a);
+
+            while (billsChange >= 0) {
+                // closed.change.push(tempKeys[0]);
+                let calc = billsChange - temp[0];
+                console.log(calc, temp[0]);
+                billsChange = calc;
+                if (billsChange < temp[0]) {
+                    // temp.unshift();
+                    closed.change.push(tempKeys[0],temp[0]);
+                    temp.unshift();
+                }
+                result = closed
+                console.log("checked");
+            }
+
+
+
+// let temp = Object.entries(currencyUnits);
+            let temp = Object.values(currencyUnits);
+            // let temp = [].concat(Object.entries(currencyUnits));
+            // for (let bills in currencyUnits) {
+            //     // billsChange > currencyUnits[bills] ? temp = temp.concat(bills, currencyUnits[bills]) : undefined;
+            //     // billsChange > currencyUnits[bills] ? temp.push(bills, currencyUnits[bills]) : undefined;
+            //     billsChange > currencyUnits[bills] ? temp.push(currencyUnits[bills]) : undefined;
+            //     // console.log("checked");
+            // }
+            let tempKeys = Object.keys(currencyUnits);
+            // console.log(tempKeys);
+            tempKeys.sort((a,b)=>b-1);
+
+
+            temp = temp.sort((a, b) => b - a);
+            // return temp[0]
+
+            // return temp.unshift();
+            // console.log(Object.keys(temp), Object.values(temp));
+
+            while (billsChange >= 0) {
+                closed.change.push(tempKeys[0]);
+                // closed.change.push(temp[1]);
+                // let calc = billsChange - temp[0][1];
+                // console.log(calc, temp[0][1]);
+                let calc = billsChange - temp[0];
+                console.log(calc, temp[0]);
+                billsChange = calc;
+                if (calc < temp[0]) {
+                    // closed.change.push(temp[0]);
+                    // let a = temp.unshift();
+                    // let b = temp.unshift();
+                    // delete temp[0][0];
+                    // delete temp[0][1];
+                    temp.unshift();
+                    // console.log(temp);
+                    // console.log("checked");
+                }
+                // billsChange = calc;
+                result = closed
+                console.log("checked");
+                // closed.change.push(temp[0]);
+            }
+
+
+let temp = [];
+            for (let bills in currencyUnits) {
+                // billsChange > currencyUnits[bills] ? temp = temp.concat(bills, currencyUnits[bills]) : undefined;
+                // billsChange > currencyUnits[bills] ? temp.push(bills, currencyUnits[bills]) : undefined;
+                billsChange > currencyUnits[bills] ? temp.push(currencyUnits[bills]) : undefined;
+                // console.log("checked");
+            }
+
+
+while (billsChange >= 0) {
+                // closed.change.push(temp[0]);
+                // closed.change.push(temp[1]);
+                let calc = billsChange - temp[0];
+                console.log(calc, temp[0]);
+                // billsChange = calc;
+                if (calc < temp[0]) {
+                    // closed.change.push(temp[0]);
+                    // temp = temp.unshift();
+                    // temp = temp.unshift();
+                    let a = temp.unshift();
+                    let b = temp.unshift();
+                    console.log(a,b);
+                    // temp.shift();
+                    // temp.shift();
+                    console.log("checked");
+                }
+                billsChange = calc;
+                // result = closed
+                console.log("checked");
+                closed.change.push(temp[0]);
+            }
+
+
+
+
+billsChange = cash - price;
+            console.log(billsChange+10000000000);
+            let availableUnits = {};
+            let funds = 0;
+            let inFunds = {status: "Insufficient Funds",change: []};
+            let closed = {status: "Closed",change: []};
+            let open = {status: "Closed",change: []};
+            let result;
+            cid.forEach((item,idx)=>{
+                let key = item[0];
+                availableUnits[key] = item[1];
+                funds += availableUnits[key];
+                // console.log(funds > billsChange);
+                if(funds < billsChange) result = closed;
+            });
+            // return availableUnits;
+            // return result;
+            let temp = [];
+            for(let bills in currencyUnits) {
+                // console.log(billsChange, billsChange > currencyUnits[bills]);
+                // billsChange > currencyUnits[bills] ? temp  = temp.concat(bills) : -1;
+                // billsChange > currencyUnits[bills] ? temp  = temp.concat([bills, currencyUnits[bills]]) : -1;
+                // billsChange > currencyUnits[bills] ? temp  = temp.concat({bills:currencyUnits[bills]}) : -1;
+                billsChange > currencyUnits[bills] ? temp  = temp.concat(bills,currencyUnits[bills]) : -1;
+            }
+            // return temp.sort((a,b)=>b-a);
+            temp.sort((a,b)=>b-a);
+            // return temp;
+            while(billsChange !== 0) {
+                closed.change.push(temp[0]);
+                closed.change.push(temp[1]);
+                // billsChange -= temp[0]
+                let calc = billsChange - temp[0];
+                if(calc <= temp[0]) {
+                    temp.unshift();
+                    temp.unshift();
+                    // billsChange = calc;
+                }
+                billsChange = calc;
+                // console.log(billsChange);
+                if(billsChange !== 0) {
+                    // closed.change.push(temp[0])
+                    // result = closed;
+                }
+                result = closed
+            }
+            return result;
+
+
+
+// return availableUnits;
+            for(let bills in currencyUnits) {
+                // if(billsChange === bills) return bills;
+                console.log(billsChange, billsChange > currencyUnits[bills]);
+                // while(billsChange > currencyUnits[bills])
+                let temp = [];
+                // while(billsChange > currencyUnits[bills]) temp  = temp.concat(bills);
+                // billsChange > currencyUnits[bills] ? temp  = temp.concat(bills) : undefined
+
+                // if(billsChange > currencyUnits[bills]) temp.push(bills);
+                // if(billsChange > currencyUnits[bills]) temp.push(bills);
+                return temp;
+            }
+            // for(let unit in availableUnits) {
+            //     // console.log(availableUnits[unit])
+            //     // if(billsChange === availableUnits[unit]){
+            //     //     unit = availableUnits[unit] - 1;
+            //     //     console.log(unit, availableUnits[unit]);
+            //     // }
+
+            // }
+
+
+                let currencyUnits = {
+                PENNY: .01,
+                NICKEL: .05,
+                DIME: .1,
+                QUARTER: .25,
+                ONE: 1,
+                FIVE: 5,
+                TEN: 10,
+                TWENTY: 20,
+                "ONE HUNDRED": 100
+            };
+            billsChange = cash - price;
+            let availableUnits = {};
+            // let availableUnits = Object.assign({}, cid);
+            // let availableUnits = {...cid};
+            // cid.forEach(item=>availableUnits[item[0] = availableUnits[item[1]]]);
+            // cid.forEach((item)=>availableUnits = item[0]);
+            cid.forEach((item,idx)=>{
+                let key = item[0];
+                availableUnits[key] = item[1];
+            });
+            return availableUnits;
+-->
