@@ -24,7 +24,7 @@
                 "ONE HUNDRED": 100
             };
             billsChange = cash - price;
-            console.log("", billsChange);
+            // console.log("", billsChange);
             // console.log(billsChange + 10000000000);
             let availableUnits = {};
             let funds = 0;
@@ -50,7 +50,7 @@
                 // break;
             } else {
                 // 
-                let tempUnit = Object.keys(currencyUnits);
+                // let tempUnit = Object.keys(currencyUnits);
                 let tempFigs = Object.values(currencyUnits);
                 // console.log(tempUnit[0], temFigs[0]);
                 // console.log(tempUnit[0])
@@ -58,13 +58,436 @@
                 let temps = Object.values(cid);
                 // console.log(temps);
                 // let temKeys = Object.keys(temps);
+                // console.log(temKeys);
                 let tempVals = Object.values(temps);
                 // console.log(tempVals);
                 tempVals.sort((a, b) => b - a);
-                // console.log(tempVals);
+                // console.log(tempVals);  
 
-                // let testVals = Object.values(tempVals);
-                // console.log(",,,,",testVals[0][1]);
+                let testVals = Object.values(tempVals);
+                // console.log(",,,,", testVals[0][0], testVals[0][1]);
+
+                // console.log(tempFigs, tempVals)
+                tempFigs.sort((a, b) => b - a);
+                // tempUnit.sort((a, b) => b - a);
+
+                tempFigs.forEach(item => item <= billsChange ? units.push(item) : -1);
+                units = units.sort((a, b) => b - a);
+
+                let tempNames = [];
+                tempVals.forEach((item, idx) => {
+                    if (tempFigs[idx] <= billsChange) {
+                        tempNames.push(tempVals[idx][0]);
+                    }
+                });
+                // console.log(tempNames);
+                // console.log(tempNames, units);
+
+                // console.log(availableUnits);
+                tempVals.forEach((item, idx) => {
+                    if (tempNames[0] === item[0]) {
+                        while (billsChange > 0 && billsChange < units[0] * item[1]) {
+                            if (billsChange >= units[0]) {
+                                billsChange -= units[0];
+                                availableUnits[tempNames[0]] -= 1;
+                                // availableUnits[tempNames[0]] = (units[0]*item[1]-units[0])/units[0];
+                                // availableUnits[tempNames[0]] -= ((units[0]*item[1]) - (units[0]*item[1]-units[0])/units[0]);
+                                // availableUnits[tempNames[0]] -= (units[0]*item[1]-units[0])/units[0];
+                                // availableUnits[tempNames[0]] -= 
+                                // availableUnits[tempNames[0]] -= units[0];
+                                // closed.change.push(item[0], availableUnits[tempNames[0]]);
+                                // if(units[0]>=1) {
+                                //     availableUnits[tempNames[0]] -= 1;
+                                // } else {
+                                //     availableUnits[tempNames[0]] -= units[0];
+                                // }
+                                open.change.push(item[0], availableUnits[tempNames[0]]);
+                                // result = closed;
+                                result = open;
+                            } else {
+                                // console.log("here",billsChange, units[0]);
+                                units.splice(0, 1);
+                                tempNames.splice(0, 1);
+                                billsChange -= units[0];
+                                // console.log(billsChange, units[0], tempNames[0]);
+                                // availableUnits[tempNames[0]] -= 1;
+                                // availableUnits[tempNames[0]] -= billsChange;
+                                // availableUnits[tempNames[0]] -= units[0];
+                                closed.change.push(tempNames[0], availableUnits[tempNames[0]]);
+                                // if (billsChange === 0) {
+                                //     result = closed;
+                                // } else {
+                                //     result = open;
+                                // }
+                                // console.log("after",billsChange, units[0]);
+                            }
+                        }
+                        // result = open;
+                    }
+                });
+
+            }
+            // return units;
+
+            return result;
+        }
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0],
+            ["QUARTER", 0], ["ONE", 0], ["FIVE", 0],
+            ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]
+        ]));
+    </script>
+</body>
+
+</html>
+
+<!--
+
+tempVals.forEach((item, idx) => {
+                    if (tempNames[0] === item[0]) {
+                        while (billsChange > 0 && billsChange < units[0] * item[1]) {
+                            if (billsChange >= units[0]) {
+                                billsChange -= units[0];
+                                availableUnits[tempNames[0]] -= 1;
+                                // availableUnits[tempNames[0]] -= units[0];
+                                // closed.change.push(item[0], availableUnits[tempNames[0]]);
+                                open.change.push(item[0], availableUnits[tempNames[0]]);
+                                // result = closed;
+                                result = open;
+                            } else {
+                                // console.log("here",billsChange, units[0]);
+                                units.splice(0, 1);
+                                tempNames.splice(0, 1);
+                                billsChange -= units[0];
+                                // console.log(billsChange, units[0], tempNames[0]);
+                                // availableUnits[tempNames[0]] -= 1;
+                                // availableUnits[tempNames[0]] -= billsChange;
+                                // availableUnits[tempNames[0]] -= units[0];
+                                closed.change.push(tempNames[0], availableUnits[tempNames[0]]);
+                                // if (billsChange === 0) {
+                                //     result = closed;
+                                // } else {
+                                //     result = open;
+                                // }
+                                // console.log("after",billsChange, units[0]);
+                            }
+                        }
+                        // result = open;
+                    }
+                });
+
+
+
+let tempNames = [];
+                tempVals.forEach((item, idx) => {
+                    if (tempFigs[idx] <= billsChange) {
+                        tempNames.push(tempVals[idx][0]);
+                    }
+                });
+                // console.log(tempNames);
+                // console.log(tempNames, units);
+
+                // console.log(availableUnits);
+                tempVals.forEach((item, idx) => {
+                    if (tempNames[0] === item[0]) {
+                        while (billsChange > 0 && billsChange < units[0] * item[1]) {
+                            if (billsChange >= units[0]) {
+                                billsChange -= units[0];
+                                // availableUnits[tempNames[0]] -= 1;
+                                availableUnits[tempNames[0]] -= billsChange;
+                                closed.change.push(item[0], availableUnits[tempNames[0]]);
+                                result = closed;
+                            } else {
+                                // console.log("here",billsChange, units[0]);
+                                units.splice(0, 1);
+                                tempNames.splice(0, 1);
+                                billsChange -= units[0];
+                                // console.log(billsChange, units[0], tempNames[0]);
+                                availableUnits[tempNames[0]] -= 1;
+                                // availableUnits[tempNames[0]] -= billsChange;
+                                closed.change.push(tempNames[0], availableUnits[tempNames[0]]);
+                                if (billsChange === 0) {
+                                    result = closed;
+                                } else {
+                                    result = open;
+                                }
+                                // console.log("after",billsChange, units[0]);
+                            }
+                        }
+                        // result = open;
+                    }
+                });
+
+
+
+                tempVals.forEach((item, idx) => {
+                    // console.log(item, idx, item[0], item[1]);
+                    if (tempNames[0] === item[0]) {
+                        // console.log(tempNames[0], item[0], idx++, idx--, item[1], billsChange)
+                        console.log(tempNames[0], item[0], item[1], billsChange, units[0], currencyUnits[item[0]]);
+                        while (billsChange > 0 && billsChange < units[0]*item[1]) {
+                            // billsChange -= units[0];
+                            // item[1] -= 1;
+                            // closed.change.push(item[0], item[1]);
+                            // result = closed;
+                            // console.log(billsChange, item[1] * units[0]);
+                            if (billsChange >= units[0]) {
+                                // console.log("hereb",billsChange, units[0]);
+                                // units.splice(0, 1);
+                                billsChange -= units[0];
+                                // item[1] -= 1;
+                                availableUnits[tempNames[0]] -= 1;
+                                closed.change.push(item[0], availableUnits[tempNames[0]]);
+                                result = closed;
+                                // console.log(billsChange, units[0]);
+                            } else {
+                                console.log("here",billsChange, units[0]);
+                                units.splice(0, 1);
+                                tempNames.splice(0,1);
+                                billsChange -= units[0];
+                                // item[1] -= 1;
+                                availableUnits[tempNames[0]] -= 1;
+                                // closed.change.push(item[0], item[1]);
+                                closed.change.push(tempNames[0], availableUnits[tempNames[0]]);
+                                // result = closed;
+                                if(billsChange === 0) {
+                                    result = closed;
+                                } else {
+                                    result = open;
+                                }
+                                console.log("after",billsChange, units[0]);
+                            }
+                        }
+                        // result = open;
+                    }
+                });
+
+
+tempVals.forEach((item, idx) => {
+                    // console.log(item, idx, item[0], item[1]);
+                    if (tempNames[0] === item[0]) {
+                        // console.log(tempNames[0], item[0], idx++, idx--, item[1], billsChange)
+                        console.log(tempNames[0], item[0], item[1], billsChange, units[0], currencyUnits[item[0]])
+
+                        if (billsChange <= item[1] * units[0]) {
+                            while(billsChange > 0) {
+                                billsChange -= units[0];
+                                item[1] -= 1;
+                                closed.change.push(item[0], item[1]);
+                                result = closed;
+                                console.log(billsChange, item[1] * units[0]);
+                            }
+                        } else {
+                            units.splice(0, 1);
+                            console.log(units)
+                            billsChange -= units[0];
+                            item[1] -= 1;
+                            closed.change.push(item[0], item[1]);
+                            result = closed;
+                        }
+
+                        // result = open;
+                    }
+                });
+
+
+
+tempVals.forEach((item, idx) => {
+                    // console.log(item, idx, item[0], item[1]);
+                    if (tempNames[0] === item[0]) {
+                        // console.log(tempNames[0], item[0], idx++, idx--, item[1], billsChange)
+                        console.log(tempNames[0], item[0], item[1], billsChange, units[0])
+                        while(billsChange > 0) {
+                            if (billsChange > 0 && billsChange <= item[1] * units[0]) {
+                                billsChange -= units[0];
+                                item[1] -= 1;
+                                closed.change.push(item[0], item[1]);
+                                result = closed;
+                            } else {
+                                units.splice(0, 1);
+                                console.log(units)
+                                billsChange -= units[0];
+                                item[1] -= 1;
+                                closed.change.push(item[0], item[1]);
+                                result = closed;
+                            }
+                        }
+                        // result = open;
+                    }
+                })
+
+
+
+for (let key in availableUnits) {
+                    // console.log(billsChange, availableUnits[key]);
+                    if (key === tempNames[0]) {
+                        console.log(billsChange, availableUnits[key], currencyUnits[key], currencyUnits[key] * availableUnits[key]);
+                        while(billsChange >= 0) {
+                            availableUnits[key] -= 1;
+                            // closed.change.push(key, availableUnits[key]);
+                            billsChange = billsChange - currencyUnits[key];
+                            closed.change.push(key, availableUnits[key]);
+                            // console.log(billsChange, availableUnits[key]);
+                            if(billsChange < currencyUnits[key]) {
+                                console.log(billsChange, currencyUnits[key]);
+                                break;
+                            }
+                        }
+                    } else {
+                        console.log("here", billsChange, key);
+                        // while (billsChange < currencyUnits[key]) {
+                        //     delete key;
+                        //     if(billsChange >= 0) {
+                        //         // delete key;
+                        //         billsChange -= currencyUnits[key];
+                        //         console.log(key);
+                        //     }
+                        // }
+                    }
+                    // console.log("here", billsChange, key)
+
+
+                    result = closed;
+                }
+
+
+
+    for (let key in availableUnits) {
+                    // console.log(billsChange, availableUnits[key]);
+                    if (key === tempNames[0]) {
+                        console.log(billsChange, availableUnits[key], currencyUnits[key], currencyUnits[key] * availableUnits[key]);
+                        while(billsChange >= 0) {
+                            availableUnits[key] -= 1;
+                            // closed.change.push(key, availableUnits[key]);
+                            billsChange = billsChange - currencyUnits[key];
+                            closed.change.push(key, availableUnits[key]);
+                            // console.log(billsChange, availableUnits[key]);
+                            if(billsChange < currencyUnits[key]) {
+                                console.log(billsChange, currencyUnits[key]);
+                                break;
+                            }
+                        }
+                    } else {
+                        console.log("here", billsChange, key);
+                    }
+                    // console.log("here", billsChange, key)
+
+
+                    result = closed;
+                }
+
+
+
+for (let key in availableUnits) {
+                    // console.log(billsChange, availableUnits[key]);
+                    if (key === tempNames[0] && billsChange <= currencyUnits[key] * availableUnits[key]) {
+                        console.log(billsChange, availableUnits[key], currencyUnits[key], currencyUnits[key] * availableUnits[key]);
+                        // availableUnits[key] -= 1;
+                        // closed.change.push(key, availableUnits[key]);
+                        // billsChange =  billsChange - currencyUnits[key];
+                        // console.log(billsChange, availableUnits[key]);
+                        while(billsChange > 0) {
+                            availableUnits[key] -= 1;
+                            // closed.change.push(key, availableUnits[key]);
+                            billsChange = billsChange - currencyUnits[key];
+                            closed.change.push(key, availableUnits[key]);
+                            console.log(billsChange, availableUnits[key]);
+                        }
+                    }
+                    result = closed;
+                }
+
+
+
+
+for (let key in availableUnits) {
+                    // console.log(billsChange, availableUnits[key]);
+                    if (key === tempNames[0] && billsChange <= currencyUnits[key] * availableUnits[key]) {
+                        console.log(billsChange, availableUnits[key], currencyUnits[key], currencyUnits[key] * availableUnits[key]);
+                        // availableUnits[key] -= billsChange;
+                        availableUnits[key] -= 1;
+                        // closed.change.push([key, availableUnits[key]]);
+                        closed.change.push(key, availableUnits[key]);
+                        billsChange =  billsChange - currencyUnits[key];
+                        console.log(billsChange, availableUnits[key]);
+                        // result = closed;
+                    }
+                    // closed.change.push(key, availableUnits[key]);
+                    result = closed;
+                }
+
+
+
+
+    for (let key in availableUnits) {
+                    // console.log(billsChange, availableUnits[key]);
+                    if (key === tempNames[0] && billsChange <= availableUnits[key]) {
+                        console.log(billsChange, availableUnits[key]);
+                        availableUnits[key] -= billsChange;
+                        // closed.change.push([key, availableUnits[key]]);
+                        closed.change.push(key, availableUnits[key]);
+                        billsChange =  billsChange - currencyUnits[key];
+                        console.log(billsChange, availableUnits[key]);
+                        // result = closed;
+                    }
+                    // closed.change.push(key, availableUnits[key]);
+                    result = closed;
+                }
+
+
+// for(let key in availableUnits) {
+                //     if(key === tempNames[0] && billsChange >= units[0]) {
+                //         console.log(key,tempNames[0], billsChange);
+                //         availableUnits[key] -= 1;
+                //         closed.change.push([key, availableUnits[key]]);
+                //         billsChange = billsChange - units[0];
+                //     } else{
+                //         units.splice(0,1);
+                //         availableUnits[key] -= 1;
+                //         closed.change.push([key, availableUnits[key]]);
+                //         billsChange = billsChange - units[0];
+                //     }
+                //     result = closed;
+                // }
+
+
+
+            if (funds < billsChange) {
+                result = inFunds;
+                // break;
+            } else {
+                // 
+                let tempUnit = Object.keys(currencyUnits);
+                let tempFigs = Object.values(currencyUnits);
+                // console.log(tempUnit[0], temFigs[0]);
+                // console.log(tempUnit[0])
+
+                let temps = Object.values(cid);
+                // console.log(temps);
+                let temKeys = Object.keys(temps);
+                // console.log(temKeys);
+                let tempVals = Object.values(temps);
+                // console.log(tempVals);
+                tempVals.sort((a, b) => b - a);
+                console.log(tempVals);  
+
+                let testVals = Object.values(tempVals);
+                console.log(",,,,",testVals[0][0], testVals[0][1]);
 
                 // console.log(tempFigs, tempVals)
                 tempFigs.sort((a, b) => b - a);
@@ -80,7 +503,21 @@
                 tempFigs.forEach(item => item <= billsChange ? units.push(item) : -1);
                 units.sort((a, b) => b - a);
                 // console.log(units);
-                // let tempNames = [];
+                let tempNames = [];
+                tempVals.forEach((item, idx)=>{
+                    // console.log(tempVals[idx][0], tempVals[idx][1]);
+                    // console.log(item, item[1]);
+                    // if(tempVals[idx][1] <= billsChange) {
+                    //     tempNames.push(tempVals[idx][0]);
+                    // }
+                    // if(item[1] <= billsChange) {
+                    //     tempNames.push(tempVals[idx][0]);
+                    // }
+                    if(tempFigs[idx] <= billsChange) {
+                        tempNames.push(tempVals[idx][0]);
+                    }
+                });
+                console.log(tempNames);
                 // units.forEach(item=> item === currencyUnits[item]?tempNames.concat(item):-1);
                 // units.forEach(item=> console.log(item, currencyUnits[item], currencyUnits[tempFigs]));
                 // tempUnit.forEach(item=> {
@@ -105,28 +542,6 @@
                 }
 
 
-
-            }
-            // return units;
-
-            // return result;
-        }
-        console.log(checkCashRegister(19.5, 20, [
-            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
-            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
-            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
-        ]));
-        console.log(checkCashRegister(3.26, 100, [
-            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
-            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
-            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
-        ]));
-    </script>
-</body>
-
-</html>
-
-<!--
 
 for (let i = 0; i < tempVals.length; i++) {
                     if (tempVals[i][1] === units[0]) {
