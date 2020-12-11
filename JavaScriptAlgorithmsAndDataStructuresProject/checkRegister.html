@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Cash Register Project</title>
+</head>
+
+<body>
+    <script>
+        function checkCashRegister(price, cash, cid) {
+            let billsChange;
+            // return billsChange;
+            let currencyUnits = {
+                PENNY: .01,
+                NICKEL: .05,
+                DIME: .1,
+                QUARTER: .25,
+                ONE: 1,
+                FIVE: 5,
+                TEN: 10,
+                TWENTY: 20,
+                "ONE HUNDRED": 100
+            };
+            let noFunds = { status: "INSUFFICIENTS_FUNDS", change: [] };
+            let closed = { status: "Closed", change: [] };
+            let open = { status: "OPEN", change: [] };
+            let result;
+            let availableCashInDrawer = 0;
+            cid.forEach(item => availableCashInDrawer += item[1]);
+            billsChange = cash - price;
+            if (billsChange > availableCashInDrawer) {
+                result = noFunds;
+            } else if (billsChange > 0) {
+                let units = [];
+                let keys = [];
+                for (let key in currencyUnits) {
+                    if (currencyUnits[key] <= billsChange) {
+                        units.push(currencyUnits[key]);
+                        keys.push(key);
+                    }
+                }
+                units.sort((a, b) => b - a);
+                keys.sort((a, b) => b - a);
+                // console.log(units, keys)
+                cid.forEach((item, idx) => {
+                    if (item[0] === keys[0]) {
+                        if (billsChange > 0 && billsChange <= item[1]) {
+                            item[1] -= units[0];
+                            open.change.push([item[0], billsChange]);
+                        } else {
+
+                            while (billsChange > 0 && item[1] > 0) {
+
+                                if (item[1] == 0) {
+                                    // open.change.push(keys[0], item[1]);
+                                    // units.splice(0, 1);
+                                    // keys.splice(0, 1);
+                                    // console.log(item[0], item[1])
+
+                                    break;
+                                }
+                                // open.change.push(keys[0], item[1]);
+                                // billsChange -= units[0];
+                                // item[1] -= units[0];
+                                else {
+                                    // console.log("here", item[1], billsChange, units[0]);
+                                    open.change.push(keys[0], item[1]);
+                                    billsChange -= units[0];
+                                    item[1] -= units[0];
+                                }
+                                // if(billsChange > 0 ) {
+                                //     console.log(units);
+                                //     console.log("here", item[0], item[1], units[0]);
+                                // }
+                            }
+                        }
+                    }
+                });               
+                result = open;
+            } else {
+                cid.forEach(item => {
+                    closed.change.push([item[0], item[1]]);
+                });
+                result = closed;
+            }
+            return result;
+        }
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0],
+            ["QUARTER", 0], ["ONE", 0], ["FIVE", 0],
+            ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]
+        ]));
+    </script>
+</body>
+
+</html>
+
+<!--
+
+
+                cid.forEach((item, idx) => {
+                    if (item[0] === keys[0]) {
+                        if (billsChange > 0 && billsChange <= item[1]) {
+                            item[1] -= units[0];
+                            open.change.push([item[0], billsChange]);
+                        } else {
+
+                            while (billsChange > 0 && item[1] > 0) {
+
+                                if (item[1] == 0) {
+                                    // open.change.push(keys[0], item[1]);
+                                    // units.splice(0, 1);
+                                    // keys.splice(0, 1);
+                                    // console.log(item[0], item[1])
+
+                                    break;
+                                }
+                                // open.change.push(keys[0], item[1]);
+                                // billsChange -= units[0];
+                                // item[1] -= units[0];
+                                else {
+                                    // console.log("here", item[1], billsChange, units[0]);
+                                    open.change.push(keys[0], item[1]);
+                                    billsChange -= units[0];
+                                    item[1] -= units[0];
+                                }
+                                // if(billsChange > 0 ) {
+                                //     console.log(units);
+                                //     console.log("here", item[0], item[1], units[0]);
+                                // }
+                            }
+                        }
+                    }
+                });
+
+                // cid.forEach(item => {
+                //     // console.log(item[0], item[1]);
+                //     while (billsChange > 0) {
+                //         let diff = item[1];
+                //         if (item[0] === keys[0] && diff > 0) {
+                //             billsChange -= units[0];
+                //             // let diff = item[1];
+                //             diff -= units[0];
+                //         } else {
+                //             units.splice(0, 1);
+                //             keys.splice(0, 1);
+                //             billsChange -= units[0];
+                //             diff -= units[0];
+                //         }
+                //         open.change.push([item[0], item[1]]);
+                //     }
+                // });
+
+
+cid.forEach(item => {
+                    if (item[0] === keys[0]) {
+                        if (billsChange > 0 && billsChange <= item[1]) {
+                            item[1] -= units[0];
+                            open.change.push([item[0], billsChange]);
+                        } else {
+
+                            while (billsChange > 0) {
+
+                                if (item[1] == 0) {
+                                    // open.change.push(keys[0], item[1]);
+                                    units.splice(0, 1);
+                                    keys.splice(0, 1);
+
+                                    break;
+                                }
+                                // open.change.push(keys[0], item[1]);
+                                // billsChange -= units[0];
+                                // item[1] -= units[0];
+                                else {
+                                    // console.log("here", item[1], billsChange, units[0]);
+                                    open.change.push(keys[0], item[1]);
+                                    billsChange -= units[0];
+                                    item[1] -= units[0];
+                                }
+                            }
+                        }
+                    }
+                });
+
+
+
+                cid.forEach(item => {
+                    if (item[0] === keys[0]) {
+                        if (billsChange > 0 && billsChange <= item[1]) {
+                            item[1] -= units[0];
+                            open.change.push([item[0], billsChange]);
+                        } else {
+                            while (billsChange > 0) {
+                                // if (item[1] == 0) {
+                                //     // open.change.push(keys[0], item[1]);
+                                //     units.splice(0, 1);
+                                //     keys.splice(0, 1);
+                                //     // console.log(units, keys)
+                                //     // console.log("here", item[1], billsChange);
+                                //     // item[1] -= units[0];
+                                //     // console.log(item[1], "??");
+                                //     // console.log(units[0], billsChange);
+                                //     // open.change.push(keys[0], item[1]);
+                                //     break;
+                                // }
+                                // console.log("here", item[1], billsChange, units[0]);
+                                // billsChange -= units[0];
+
+                                // item[1] -= units[0];
+                                // // item[1] = billsChange;
+                                // console.log(item[1], "??");
+                                // console.log(units[0], billsChange);
+                                // open.change.push(keys[0], item[1]);
+                                if (item[1] == 0) {
+                                    // open.change.push(keys[0], item[1]);
+                                    units.splice(0, 1);
+                                    keys.splice(0, 1);
+                                    // console.log(units, keys)
+                                    // console.log("here", item[1], billsChange);
+                                    // item[1] -= units[0];
+                                    // console.log(item[1], "??");
+                                    // console.log(units[0], billsChange);
+                                    // open.change.push(keys[0], item[1]);
+                                    break;
+                                } else {
+                                    console.log("here", item[1], billsChange, units[0]);
+                                    open.change.push(keys[0], item[1]);
+                                    billsChange -= units[0];
+
+                                    item[1] -= units[0];
+                                    // item[1] = billsChange;
+                                    console.log(item[1], "??");
+                                    console.log(units[0], billsChange);
+                                    // open.change.push(keys[0], item[1]);
+                                }
+                            }
+                            // open.change.push(keys[0], item[1]);
+                        }
+                    }
+                });
+
+
+cid.forEach(item => {
+                    if (item[0] === keys[0]) {
+                        if (billsChange > 0 && billsChange <= item[1]) {
+                            item[1] -= units[0];
+                            open.change.push([item[0], billsChange]);
+                        } else {
+                            while (billsChange > 0) {
+                                if (item[1] == 0) {
+                                    // open.change.push(keys[0], item[1]);
+                                    units.splice(0, 1);
+                                    keys.splice(0, 1);
+                                    // console.log(units, keys)
+                                    // console.log("here", item[1], billsChange);
+                                } 
+                                // else {
+                                //     console.log("here", item[1], billsChange);
+                                //     billsChange -= units[0];
+                                //     item[1] -= units[0];
+                                //     console.log(item[1], "??");
+                                //     console.log(units[0], billsChange);
+                                //     open.change.push(keys[0], item[1]);
+                                // }
+                                console.log("here", item[1], billsChange);
+                                billsChange -= units[0];
+                                item[1] -= units[0];
+                                console.log(item[1], "??");
+                                console.log(units[0], billsChange);
+                                open.change.push(keys[0], item[1]);
+                                // if(item[1] == 0) {
+                                //     // open.change.push(keys[0], item[1]);
+                                //     units.splice(0,1);
+                                //     keys.splice(0,1);
+                                //     // console.log(units, keys)
+                                //     // console.log("here", item[1], billsChange);
+                                // } 
+
+                                // item[1] -= units[0];
+                                // console.log(item[1], "??");
+                                // open.change.push(keys[0], diff);
+
+                                // else {
+                                //     open.change.push(keys[0], item[1]);
+                                // }
+                                // console.log(units, keys)
+                                // billsChange -= units[0];
+                                // item[1] -= units[0];
+                                // open.change.push(keys[0], item[1]);
+                            }
+                            // open.change.push(keys[0], item[1]);
+                        }
+                    }
+                });
+
+
+
+cid.forEach(item => {
+                    if (item[0] === keys[0] && billsChange <= item[1]) {
+                        console.log(item[0], keys[0]);
+                        open.change.push([item[0], billsChange]);
+
+                    } else if (item[0] === keys[0] && item[1] > 0) {
+                        while (billsChange >= 0 && item[1] > 0) {
+                            billsChange -= units[0];
+                            // item[1] -= units[0];
+                            // open.change.push([item[0], item[1]]);
+                        }
+                        open.change.push([item[0], item[1]]);
+                    }
+                });
+
+
+cid.forEach(item => {
+                    if (item[0] === keys[0] && billsChange <= item[1]) {
+                        console.log(item[0], keys[0]);
+                        open.change.push([item[0], billsChange]);
+
+                    } else if (item[0] === keys[0] && item[1] > 0) {
+                        while (billsChange >= 0 && item[1] > 0) {
+                            billsChange -= units[0];
+                            // item[1] -= units[0];
+                            // open.change.push([item[0], item[1]]);
+                        }
+                        open.change.push([item[0], item[1]]);
+                        // open.change.push([item[0], item[1]]);
+                        // units.splice(0, 1);
+                        // if (billsChange >= 0) {
+                        //     while (billsChange > 0 && item[1] > 0) {
+                        //         billsChange -= units[0];
+                        //         // item[1] -= units[0];
+                        //         // open.change.push([item[0], item[1]]);
+                        //     }
+                        //     open.change.push([item[0], item[1]]);
+                        // }
+                    }
+                    // else {
+                    //     units.splice(0,1);
+                    //     console.log(units)
+                    //     // while(billsChange > 0) {
+                    //     //     billsChange -= units[0];
+                    //     //     open.change.push([item[0], item[1]]);
+                    //     // }
+                    // }
+                    // else {
+                    //     units.splice(0,1);
+                    //     keys.splice(0,1);
+                    // console.log(units)
+                    // while(billsChange > 0) {
+                    //     billsChange -= units[0];
+                    //     open.change.push([item[0], item[1]]);
+                    // }
+                    // open.change.push([item[0], item[1]]);
+                    // }
+                });
+
+
+cid.forEach(item => {
+                    if (item[0]=== keys[0] && billsChange <= item[1]) {
+                        console.log(item[0], keys[0]);
+                        open.change.push([item[0], billsChange]);
+                    } 
+                    while(billsChange >= 0 && item[1] > 0) {
+                            billsChange -= units[0];
+                            item[1] -= units[0];
+                            open.change.push(item[0], item[1]);
+                        }
+                        units.splice(1,0);
+                        keys.splice(1,0);
+                    // else {
+                        // while(billsChange >= 0 && item[1] > 0) {
+                        //     billsChange -= units[0];
+                        //     item[1] -= units[0];
+                        //     open.change.push(item[0], item[1]);
+                        // }
+                        // units.splice(1,0);
+                        // keys.splice(1,0);
+                    // }
+                });
+
+
+
+
+if (billsChange > availableCashInDrawer) {
+                result = noFunds;
+            } else if (billsChange > 0) {
+                let units = [];
+                let keys = [];
+                for (let key in currencyUnits) {
+                    if (currencyUnits[key] <= billsChange) {
+                        units.push(currencyUnits[key]);
+                        keys.push(key);
+                    }
+                }
+                units.sort((a, b) => b - a);
+                keys.sort((a, b) => b - a);
+                // console.log(units, keys)
+                cid.forEach(item => {
+                    if (item[0] === keys[0] && billsChange <= item[1]) {
+                        console.log(item[0], keys[0]);
+                        while(billsChange > 0) {
+                            billsChange -= units[0];
+                            item[1] -= units[0];
+                        }
+                        open.change.push([item[0], item[1]]);
+                    } else {
+                        units.splice(0,1);
+                        keys.splice(0,1);
+                    }
+                });
+                result = open;
+            } else {
+                cid.forEach(item=> {
+                    closed.change.push([item[0], item[1]]);
+                });
+                result = closed;
+            }
+            return result;
+
+
+cid.forEach(item => {
+                    if (item[0] === keys[0] && billsChange <= item[1]) {
+                        // console.log(item[0], keys[0]);
+                        open.change.push([item[0], billsChange]);
+                    } else {
+                        if (item[1] > 0) {
+                            while (billsChange >= 0) {
+                                billsChange -= units[0];
+                                item[1] -= units[0];
+                                open.change.push([item[0], item[1]]);
+                            }
+                        } else {
+                            units.splice(0,1);
+                            keys.splice(0,1);
+                        }
+                    }
+                });
+
+
+
+cid.forEach(item => {
+                    // console.log(item, item[0], keys[0])
+                    if (item[0] === keys[0] && item[1] >= billsChange) {
+                        console.log(item[0], keys[0])
+                        item[1] -= billsChange;
+                        open.change.push(item[0], billsChange);
+                    } else {
+                        units.splice(0, 1);
+                        keys.splice(0, 1);
+                        while (billsChange > 0 && item[1] > 0) {
+                            billsChange -= units[0];
+                            item[1] -= units[0];
+                            open.change.push(item[0], item[1]);
+                        }
+                    }
+                });
+
+
+
+    for(let i = 0; i < cid.length; i++) {
+                    console.log(cid[i],cid[i][0], cid[i][1], keys[0]);
+                    if(cid[i][0] === keys[0] && billsChange <= cid[i][1]) {
+                        console.log(cid[i][0], keys[0])
+                        cid[i][1] -= billsChange;
+                        open.change.push(cid[i][0], billsChange);
+                    } else {
+                        units.splice(0,1);
+                        keys.splice(0,1);
+                        while(billsChange > 0 && cid[i][1] > 0) {
+                            billsChange -= units[0];
+                            cid[i][1] -= units[0];
+                            open.change.push(cid[i][0], cid[i][1]);
+                        }
+                    }
+                    // result = open;
+                }
+
+
+cid.forEach(item => {
+                    // console.log(item, item[0], item[1]);
+                    if (item[0] === keys[0]) {
+                        // console.log(item[0], item[1]);
+                        while (billsChange > 0 && item[1] >= 0) {
+                            billsChange -= units[0];
+                            item[1] -= units[0];
+                            open.change.push(item[0], item[1]);
+                        }
+                    } 
+                    // else {
+                    //     units.splice(0,1);
+                    //     keys.splice(0,1);
+                    // }
+                    result = open;
+                });
+
+
+    while(billsChange > 0) {
+                            if (billsChange >= item[1]) {
+                                billsChange -= units[0];
+                                item[1] -= units[0];
+                                open.change.push(item[0], item[1]);
+                            } else {
+                                units.splice(0,1);
+                                keys.splice(0,1);
+                            }
+                        }
+
+
+
+    // open.change.push(item[0], item[1] - units[0]);
+                        while (billsChange >= 0 && billsChange <= item[1]) {
+                            console.log(",,", billsChange);
+                            if (billsChange >= units[0]) {
+                                // console.log(",,", billsChange);
+                                billsChange = billsChange - (item[1] - units[0]);
+                                item[1] -= units[0];
+                                open.change.push(item[0], item[1]);
+                                console.log(billsChange);
+                            } else {
+                                units.splice(0,1);
+                                keys.splice(0,1);
+                            }
+                        }
+-->
