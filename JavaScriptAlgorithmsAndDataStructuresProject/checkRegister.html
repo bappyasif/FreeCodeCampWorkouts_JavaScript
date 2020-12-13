@@ -48,19 +48,20 @@
                 tempValues.sort((a, b) => b - a);
 
                 tempValues.forEach(item => {
-                    if (item[0] === keys[0] && billsChange < item[1]) {
-                        open.change.push([item[0], billsChange]);
-                    } else {
-                        if (billsChange >= item[1] && item[1] > 0) {
-                            while ((billsChange > units[0]) && item[1] > 0) {
-                                open.change.push([item[0], item[1]]);
+                    if (item[0] === keys[0]) {
+                        let valueChanged;
+                        while (billsChange >= units[0] && item[1] > 0) {
+                            valueChanged = 0;
+                                // open.change.push([item[0], item[1]]);
                                 billsChange -= units[0];
                                 item[1] -= units[0];
+                                valueChanged += units[0];
+                                open.change.push([item[0], valueChanged]);
                             }
+                            // open.change.push([item[0], valueChanged]);
                             units.splice(0, 1);
                             keys.splice(0, 1);
-                        }
-                    }
+                    } 
                 });
                 result = open;
             } else {
@@ -97,6 +98,35 @@
 </html>
 
 <!--
+
+tempValues.forEach(item => {
+                    if (item[0] === keys[0]) {
+                        while (billsChange >= units[0] && item[1] > 0) {
+                                open.change.push([item[0], item[1]]);
+                                billsChange -= units[0];
+                                item[1] -= units[0];
+                            }
+                            units.splice(0, 1);
+                            keys.splice(0, 1);
+                    } 
+                });
+
+
+tempValues.forEach(item => {
+                    if (item[0] === keys[0] && billsChange < item[1]) {
+                        open.change.push([item[0], billsChange]);
+                    } else {
+                        if (billsChange >= item[1] && item[1] > 0) {
+                            while ((billsChange > units[0]) && item[1] > 0) {
+                                open.change.push([item[0], item[1]]);
+                                billsChange -= units[0];
+                                item[1] -= units[0];
+                            }
+                            units.splice(0, 1);
+                            keys.splice(0, 1);
+                        }
+                    }
+                });
 
 
 tempValues.forEach(item => {

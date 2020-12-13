@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Cash Register Project</title>
+</head>
+
+<body>
+    <script>
+        let denomValues = [
+            { name: "ONE HUNDRED", value: 100.0 },
+            { name: "TWENTY", value: 20.0 },
+            { name: "TEN", value: 10.0 },
+            { name: "FIVE", value: 5.0 },
+            { name: "ONE", value: 1.0 },
+            { name: "QUARTER", value: 0.25 },
+            { name: "DIME", value: 0.1 },
+            { name: "NICKEL", value: 0.05 },
+            { name: "PENNY", value: 0.01 },
+        ];
+
+        function checkCashRegister(price, cash, cid) {
+            let output = { status: null, change: [] };
+            let billsChange = cash - price;
+            // transform CID array to an Drawer Object
+            let register = cid.reduce((acc, curr) => {
+                acc.total += curr[1]; // adding values to total
+                acc[curr[0]] = curr[1]; // pointing to next array object
+                return acc;
+            }, { total: 0 });
+
+            // handling billsChanges edge cases
+            if (register.total === billsChange) {
+                output.status = "CLOSED";
+                output.change = cid;
+                return output;
+            }
+
+            if (register.total < billsChange) {
+                output.status = "INSUFFICIENT_FUNDS";
+                return output;
+            }
+
+            // looping through denomValues object
+            let change_resgister = denomValues.reduce((acc, curr) => {
+                let valueChanged = 0;
+                // while there is still money of this type in register drawer (> 0)
+                // And denom vlaues(currency amount) is larger than billsChange remaining
+                while (register[curr.name] > 0 && billsChange >= curr.value) {
+                    billsChange -= curr.value;
+                    register[curr.name] -= curr.value;
+                    valueChanged += curr.value;
+                    // billsChange = Math.round(billsChange * 100 / 100);
+                    billsChange = Math.round(billsChange * 100) / 100;
+                }
+                // Add this denomination value to output object if it's used
+                if (valueChanged) {
+                    acc.push([curr.name, valueChanged]);
+                }
+                return acc;
+            }, []);
+
+            // if there is no elelment in change_register or we have leftover
+            // billsChange then returning INSIFFICIENT_FUNDS edge case
+            if (change_resgister.length < 1 || billsChange > 0) {
+                output.status = "INSUFFIECIENT_FUNDS";
+                return output;
+            }
+
+            // balance changes to customer
+            output.status = "OPEN";
+            output.change = change_resgister;
+            return output;
+        }
+
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(3.26, 100, [
+            ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1],
+            ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55],
+            ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]
+        ]));
+        console.log(checkCashRegister(19.5, 20, [
+            ["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0],
+            ["QUARTER", 0], ["ONE", 0], ["FIVE", 0],
+            ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]
+        ]));
+    </script>
+</body>
+
+</html>
